@@ -4,202 +4,788 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <title>Tim ❤️💕🫶</title>
+    <meta name="description" content="Một trang chào đón đặc biệt dành cho bạn" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet" />
     <style>
-      :root{
-        --bg-1:#ffe6f0;--bg-2:#ffb3c7;--bg-3:#b4b8ff;--bg-4:#fff59d;--bg-5:#ccf2ff;
-        --text:#111;
-      }
-      *{box-sizing:border-box}
-      html,body{height:100%;}
-      body{
-        margin:0;
-        min-height:100svh; /* better on mobile */
-        font-family: system-ui, -apple-system, Segoe UI, Roboto, Arial, "Noto Sans", "Apple Color Emoji","Segoe UI Emoji";
-        color:var(--text);
-        display:grid; place-items:center;
-        overflow:hidden;
-        background: linear-gradient(135deg,var(--bg-1),var(--bg-2),var(--bg-3),var(--bg-4),var(--bg-5));
-        background-size: 200% 200%; 
-        animation: bgShift 20s ease-in-out infinite;
+      /* ========================================
+         DESIGN TOKENS
+         ======================================== */
+      :root {
+        --font: 'Inter', system-ui, -apple-system, sans-serif;
+        /* Deep vivid palette */
+        --bg: #080015;
+        --purple: #7c3aed;  --purple-dim: rgba(124,58,237,0.35);
+        --pink: #ec4899;    --pink-dim: rgba(236,72,153,0.35);
+        --coral: #ff6b6b;   --coral-dim: rgba(255,107,107,0.35);
+        --amber: #fbbf24;   --amber-dim: rgba(251,191,36,0.35);
+        --cyan: #22d3ee;    --cyan-dim: rgba(34,211,238,0.30);
+        --emerald: #34d399;
+        --rose: #fb7185;
+        --fuchsia: #d946ef;
+        /* Glass */
+        --g-bg: rgba(255,255,255,0.05);
+        --g-border: rgba(255,255,255,0.08);
+        --g-inner: rgba(255,255,255,0.035);
+        /* Text */
+        --t1: rgba(255,255,255,0.95);
+        --t2: rgba(255,255,255,0.72);
+        --t3: rgba(255,255,255,0.46);
+        /* Radius */
+        --r-card: 28px;
+        --r-btn: 14px;
+        --r-pill: 999px;
       }
 
-      @keyframes bgShift{0%{background-position:0% 50%}50%{background-position:100% 50%}100%{background-position:0% 50%}}
+      /* ========================================
+         RESET
+         ======================================== */
+      *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+      html,body{height:100%}
 
-      /* Center card */
+      body {
+        min-height: 100svh;
+        font-family: var(--font);
+        color: var(--t1);
+        display: grid;
+        place-items: center;
+        overflow: hidden;
+        background: var(--bg);
+      }
+
+      /* ========================================
+         AURORA GRADIENT ORBS
+         ======================================== */
+      .aurora{position:fixed;inset:0;z-index:0}
+      .aurora-orb{position:absolute;border-radius:50%;filter:blur(85px);will-change:transform;mix-blend-mode:screen}
+
+      .aurora-orb:nth-child(1){width:52vmax;height:52vmax;top:-16%;left:-10%;
+        background:radial-gradient(circle,var(--purple),transparent 68%);opacity:.5;
+        animation:ao1 15s ease-in-out infinite alternate}
+      .aurora-orb:nth-child(2){width:46vmax;height:46vmax;bottom:-20%;right:-12%;
+        background:radial-gradient(circle,var(--pink) 0%,var(--fuchsia) 35%,transparent 70%);opacity:.32;
+        animation:ao2 18s ease-in-out infinite alternate}
+      .aurora-orb:nth-child(3){width:38vmax;height:38vmax;top:38%;left:48%;
+        background:radial-gradient(circle,var(--coral) 0%,transparent 70%);opacity:.2;
+        animation:ao3 22s ease-in-out infinite alternate}
+      .aurora-orb:nth-child(4){width:30vmax;height:30vmax;top:5%;right:15%;
+        background:radial-gradient(circle,var(--cyan),transparent 68%);opacity:.18;
+        animation:ao1 20s ease-in-out infinite alternate-reverse}
+
+      @keyframes ao1{to{transform:translate(10vw,8vh) scale(1.2)}}
+      @keyframes ao2{to{transform:translate(-12vw,-10vh) scale(1.25)}}
+      @keyframes ao3{to{transform:translate(6vw,-14vh) scale(1.15)}}
+
+      /* ========================================
+         PARTICLE CANVAS (constellation)
+         ======================================== */
+      #pCanvas{position:fixed;inset:0;z-index:1;pointer-events:none}
+
+      /* ========================================
+         HEARTS — SVG data-URI + hue-rotate
+         ======================================== */
+      .hearts{position:fixed;inset:0;z-index:3;pointer-events:none;overflow:hidden;
+        transition:transform .12s ease-out}
+
+      .heart {
+        position: absolute;
+        bottom: -14svh;
+        width: var(--sz); height: var(--sz);
+        background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cdefs%3E%3CradialGradient id='g' cx='38%25' cy='28%25' r='68%25'%3E%3Cstop offset='0%25' stop-color='%23fff' stop-opacity='.38'/%3E%3Cstop offset='100%25' stop-color='%23ff4081' stop-opacity='1'/%3E%3C/radialGradient%3E%3C/defs%3E%3Cpath d='M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z' fill='url(%23g)'/%3E%3C/svg%3E") no-repeat center/contain;
+        filter: hue-rotate(var(--hue,0deg)) drop-shadow(0 0 var(--gl,8px) rgba(255,64,129,.45));
+        animation: hFloat var(--dur) cubic-bezier(.22,.61,.36,1) forwards;
+        will-change: transform, opacity;
+      }
+
+      @keyframes hFloat {
+        0%   {transform:translateY(0)       translateX(0)                    scale(0) rotate3d(0,1,0,0deg); opacity:0}
+        7%   {transform:translateY(-7svh)   translateX(0)                    scale(1) rotate3d(0,1,0,0deg); opacity:var(--op,.8)}
+        30%  {transform:translateY(-30svh)  translateX(calc(var(--dx)*-1))   scale(1.04) rotate3d(0,1,0,20deg)}
+        55%  {transform:translateY(-55svh)  translateX(var(--dx))            scale(1.06) rotate3d(0,1,0,-14deg)}
+        78%  {transform:translateY(-80svh)  translateX(calc(var(--dx)*-.5))  scale(1.02) rotate3d(0,1,0,8deg); opacity:calc(var(--op,.8)*.4)}
+        100% {transform:translateY(-118svh) translateX(calc(var(--dx)*.3))   scale(.8)  rotate3d(0,1,0,0deg); opacity:0}
+      }
+
+      /* Burst hearts */
+      .heart-burst{
+        position:fixed;
+        width:var(--sz,12px);height:var(--sz,12px);
+        background:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cdefs%3E%3CradialGradient id='g' cx='38%25' cy='28%25' r='68%25'%3E%3Cstop offset='0%25' stop-color='%23fff' stop-opacity='.38'/%3E%3Cstop offset='100%25' stop-color='%23ff4081' stop-opacity='1'/%3E%3C/radialGradient%3E%3C/defs%3E%3Cpath d='M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z' fill='url(%23g)'/%3E%3C/svg%3E") no-repeat center/contain;
+        filter:hue-rotate(var(--hue,0deg)) drop-shadow(0 0 6px rgba(255,64,129,.5));
+        animation:burst .75s cubic-bezier(.16,1,.3,1) forwards;
+        pointer-events:none; z-index:99;
+      }
+      @keyframes burst{
+        0%  {transform:translate(0,0) scale(1);opacity:1}
+        100%{transform:translate(var(--bx),var(--by)) scale(.2);opacity:0}
+      }
+
+      /* ========================================
+         ANIMATED WAVES (bottom)
+         ======================================== */
+      .waves{position:fixed;bottom:0;left:0;width:100%;height:clamp(60px,12vh,110px);z-index:4;pointer-events:none;overflow:hidden}
+      .wave{position:absolute;bottom:0;width:200%;height:100%}
+      .wave svg{display:block;width:100%;height:100%}
+      .wave:nth-child(1){animation:waveX 10s linear infinite;opacity:.35}
+      .wave:nth-child(2){animation:waveX 15s linear infinite reverse;opacity:.2;bottom:-8px}
+      @keyframes waveX{to{transform:translateX(-50%)}}
+
+      /* ========================================
+         CARD — Bento glass with sections
+         ======================================== */
+      .card-wrap{position:relative;z-index:10;
+        animation:entrance .9s cubic-bezier(.16,1,.3,1) both}
+      @keyframes entrance{
+        from{opacity:0;transform:translateY(48px) scale(.9)}
+        to{opacity:1;transform:translateY(0) scale(1)}}
+
       .card{
         position:relative;
-        z-index: 2;
-        text-align:center;
-        padding:clamp(16px,4vw,28px) clamp(20px,6vw,40px);
-        backdrop-filter: blur(8px) saturate(1.15);
-        -webkit-backdrop-filter: blur(8px) saturate(1.15);
-         background: rgba(255,255,255,0.45);  
-        border:1px solid rgba(255,255,255,0.6);
+        display:flex;flex-direction:column;align-items:center;
+        max-width:min(92vw,480px); width:100%;
+        border-radius:var(--r-card);
+        background:var(--g-bg);
+        backdrop-filter:blur(44px) saturate(1.5);
+        -webkit-backdrop-filter:blur(44px) saturate(1.5);
+        border:1px solid var(--g-border);
+        overflow:hidden;
+        transition:transform .5s cubic-bezier(.16,1,.3,1);
+      }
+
+      /* Cursor-follow light */
+      .card-glow{
+        position:absolute;width:280px;height:280px;border-radius:50%;
+        background:radial-gradient(circle,rgba(255,255,255,.07),transparent 70%);
+        pointer-events:none;opacity:0;transition:opacity .35s;
+        transform:translate(-50%,-50%);z-index:0;
+      }
+      .card:hover .card-glow{opacity:1}
+
+      /* Shimmer */
+      .card::before{
+        content:'';position:absolute;top:0;left:-110%;width:110%;height:100%;
+        background:linear-gradient(100deg,transparent 20%,rgba(255,255,255,.03) 44%,rgba(255,255,255,.09) 50%,rgba(255,255,255,.03) 56%,transparent 80%);
+        animation:shimmer 8s 2s ease-in-out infinite;pointer-events:none;z-index:1;
+      }
+      @keyframes shimmer{0%,100%{left:-110%}50%{left:110%}}
+
+      /* Gradient border spin */
+      .card::after{
+        content:'';position:absolute;inset:-1px;border-radius:var(--r-card);
+        background:conic-gradient(from var(--ba,0deg),var(--purple),var(--pink),var(--coral),var(--amber),var(--cyan),var(--purple));
+        -webkit-mask:linear-gradient(#fff 0 0) content-box,linear-gradient(#fff 0 0);
+        -webkit-mask-composite:xor;mask-composite:exclude;
+        padding:1px;opacity:.3;pointer-events:none;z-index:0;
+        animation:borderSpin 10s linear infinite;
+      }
+      @keyframes borderSpin{to{--ba:360deg}}
+      @property --ba{syntax:'<angle>';initial-value:0deg;inherits:false}
+
+      /* Breathing glow */
+      @keyframes breathe{
+        0%,100%{box-shadow:0 0 50px rgba(124,58,237,.12),0 8px 32px rgba(8,0,21,.15)}
+        50%    {box-shadow:0 0 80px rgba(124,58,237,.22),0 8px 32px rgba(8,0,21,.15)}
+      }
+      .card{animation:entrance .9s cubic-bezier(.16,1,.3,1) both, breathe 5s 1.2s ease-in-out infinite}
+
+      /* ---- CARD SECTIONS ---- */
+      .card-hero{
+        position:relative;z-index:2;
+        width:100%;text-align:center;
+        padding:clamp(28px,5vw,44px) clamp(24px,5vw,44px) 20px;
+      }
+      .card-body{
+        position:relative;z-index:2;
+        width:100%;text-align:center;
+        padding:0 clamp(24px,5vw,44px) clamp(24px,4vw,36px);
+      }
+      .card-footer{
+        position:relative;z-index:2;
+        width:100%;
+        padding:14px clamp(24px,5vw,44px) 18px;
+        background:var(--g-inner);
+        border-top:1px solid rgba(255,255,255,.04);
+      }
+
+      /* ---- ICON ---- */
+      .icon-wrap{
+        display:inline-flex;cursor:pointer;
+        -webkit-tap-highlight-color:transparent;
+        animation:iconBob 3.5s ease-in-out infinite;
+      }
+      .icon-wrap svg{
+        filter:drop-shadow(0 0 16px rgba(244,114,182,.5));
+        transition:transform .35s cubic-bezier(.175,.885,.32,1.275);
+      }
+      .icon-wrap:hover svg{transform:scale(1.18)}
+      .icon-wrap.pop svg{animation:iconPop .55s cubic-bezier(.175,.885,.32,1.275)}
+      @keyframes iconBob{0%,100%{transform:translateY(0)}50%{transform:translateY(-7px)}}
+      @keyframes iconPop{0%{transform:scale(1)}30%{transform:scale(1.5)}60%{transform:scale(.85)}100%{transform:scale(1)}}
+
+      .icon-area{margin-bottom:18px;animation:fUp .7s .15s cubic-bezier(.16,1,.3,1) both}
+
+      /* ---- TYPOGRAPHY ---- */
+      .hello{
+        font-size:clamp(11px,1.6vw,13px);font-weight:700;
+        letter-spacing:5px;text-transform:uppercase;
+        color:var(--coral);margin:0 0 8px;
+        animation:fUp .7s .3s cubic-bezier(.16,1,.3,1) both;
+      }
+
+      .name{
+        font-weight:900;font-size:clamp(38px,9vw,58px);line-height:1.08;
+        margin:0 0 0;
+        background:linear-gradient(135deg,#f472b6 0%,#d946ef 50%,#9333ea 100%);
+        background-size:250% auto;
+        -webkit-background-clip:text;background-clip:text;
+        -webkit-text-fill-color:transparent;
+        animation:fUp .7s .45s cubic-bezier(.16,1,.3,1) both,
+                 gradShift 6s ease infinite;
+      }
+      @keyframes gradShift{0%,100%{background-position:0% center}50%{background-position:100% center}}
+
+      .divider-line{
+        width:48px;height:2px;margin:18px auto 16px;
+        background:linear-gradient(90deg,transparent,var(--pink),var(--purple),transparent);
+        border-radius:2px;
+        animation:fUp .7s .55s cubic-bezier(.16,1,.3,1) both;
+      }
+
+      .message{
+        font-size:clamp(14px,2.2vw,16.5px);font-weight:500;
+        color:var(--t2);line-height:1.55;margin:0 0 22px;
+        animation:fUp .7s .63s cubic-bezier(.16,1,.3,1) both;
+      }
+
+      /* ---- BUTTONS ---- */
+      .btn-group{
+        display:flex;flex-wrap:wrap;gap:10px;
+        justify-content:center;
+        animation:fUp .7s .73s cubic-bezier(.16,1,.3,1) both;
+      }
+
+      /* Primary — Messenger */
+      .btn-primary{
+        display:inline-flex;align-items:center;gap:8px;
+        padding:13px 26px;
+        border-radius:var(--r-btn);border:none;
+        background:linear-gradient(135deg, #d946ef, #9333ea);
+        color:#fff;font-family:var(--font);font-size:16px;font-weight:700;
+        text-decoration:none;cursor:pointer;position:relative;overflow:hidden;
+        box-shadow:inset 0 0 12px rgba(255,255,255,.3),
+                   0 0 28px rgba(217,70,239,.3),
+                   0 4px 14px rgba(147,51,234,.3);
+        transition:all .4s cubic-bezier(.16,1,.3,1);
+      }
+      .btn-primary::before{
+        content:'';position:absolute;inset:0;
+        background:linear-gradient(135deg,rgba(255,255,255,.18),transparent 60%);
+        opacity:0;transition:opacity .3s;
+      }
+      .btn-primary:hover{
+        transform:translateY(-3px) scale(1.03);
+        box-shadow:inset 0 0 16px rgba(255,255,255,.4),
+                   0 0 44px rgba(217,70,239,.4),
+                   0 8px 28px rgba(147,51,234,.4);
+      }
+      .btn-primary:hover::before{opacity:1}
+      .btn-primary:active{transform:translateY(0) scale(.97);transition-duration:.1s}
+      .btn-primary:focus-visible{outline:2px solid var(--coral);outline-offset:3px}
+      .btn-primary svg,.btn-primary span{position:relative;z-index:1}
+
+      /* Secondary — Change name */
+      .btn-secondary{
+        display:inline-flex;align-items:center;gap:7px;
+        padding:12px 22px;
+        border-radius:var(--r-btn);
+        border:1px solid rgba(255,255,255,.12);
+        background:rgba(255,255,255,.04);
+        color:var(--t2);
+        font-family:var(--font);font-size:13.5px;font-weight:600;
+        cursor:pointer;
+        transition:all .35s cubic-bezier(.16,1,.3,1);
+        backdrop-filter:blur(8px);-webkit-backdrop-filter:blur(8px);
+      }
+      .btn-secondary:hover{
+        background:rgba(255,255,255,.1);
+        border-color:rgba(255,255,255,.22);
+        color:var(--t1);
+        transform:translateY(-2px);
+        box-shadow:0 4px 20px rgba(124,58,237,.15);
+      }
+      .btn-secondary:active{transform:translateY(0) scale(.97)}
+      .btn-secondary:focus-visible{outline:2px solid var(--purple);outline-offset:3px}
+
+      /* ---- CLOCK (bento sub-tile) ---- */
+      .clock{
+        display:flex;align-items:center;justify-content:center;gap:10px;
+        font-variant-numeric:tabular-nums;
+        animation:fUp .7s .88s cubic-bezier(.16,1,.3,1) both;
+      }
+      .clock-time{
+        font-size:clamp(18px,3.5vw,24px);font-weight:800;
+        letter-spacing:1.5px;color:var(--t1);
+      }
+      .clock-sep{
+        display:inline-block;
+        animation:blink 1.2s steps(2,jump-none) infinite;
+      }
+      @keyframes blink{50%{opacity:.2}}
+      .clock-dot{color:var(--t3);font-weight:300;font-size:18px}
+      .clock-date{
+        font-size:clamp(11px,1.5vw,13px);font-weight:500;
+        color:var(--t3);letter-spacing:.5px;
+      }
+
+      /* ---- Shared ---- */
+      @keyframes fUp{
+        from{opacity:0;transform:translateY(20px)}
+        to{opacity:1;transform:translateY(0)}
+      }
+
+      /* ========================================
+         MODAL
+         ======================================== */
+      .modal-overlay{
+        position:fixed;inset:0;z-index:100;
+        display:grid;place-items:center;
+        background:rgba(8,0,21,.75);
+        backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px);
+        opacity:0;visibility:hidden;
+        transition:opacity .45s,visibility .45s;
+      }
+      .modal-overlay.open{opacity:1;visibility:visible}
+
+      .modal{
+        background:rgba(20,10,50,.88);
+        backdrop-filter:blur(40px);-webkit-backdrop-filter:blur(40px);
+        border:1px solid var(--g-border);
         border-radius:24px;
-        box-shadow:0 2px 50px rgb(255, 0, 68) ;
-        max-width:min(92vw,720px);
-        animation: bgShift 8s ease-in-out infinite;
+        padding:clamp(28px,5vw,42px) clamp(24px,5vw,36px);
+        max-width:min(90vw,380px);width:100%;
+        text-align:center;
+        transform:translateY(28px) scale(.93);
+        transition:transform .45s cubic-bezier(.16,1,.3,1);
+        box-shadow:0 28px 80px rgba(8,0,21,.25),0 0 60px rgba(124,58,237,.15);
+      }
+      .modal-overlay.open .modal{transform:translateY(0) scale(1)}
+
+      .modal-icon{filter:drop-shadow(0 0 12px rgba(244,114,182,.4));margin-bottom:14px}
+
+      .modal h2{
+        font-size:clamp(22px,5vw,28px);font-weight:800;margin-bottom:6px;
+        background:linear-gradient(135deg,#fff,var(--coral));
+        -webkit-background-clip:text;background-clip:text;
+        -webkit-text-fill-color:transparent;
+      }
+      .modal-desc{font-size:13.5px;color:var(--t2);margin-bottom:22px;line-height:1.5}
+
+      .modal-input{
+        width:100%;padding:14px 20px;
+        border:1px solid rgba(255,255,255,.1);border-radius:14px;
+        background:rgba(255,255,255,.06);
+        color:var(--t1);font-family:var(--font);font-size:16px;font-weight:500;
+        outline:none;transition:all .3s;margin-bottom:16px;
+      }
+      .modal-input::placeholder{color:var(--t3)}
+      .modal-input:focus{
+        border-color:var(--purple);
+        box-shadow:0 0 0 3px rgba(124,58,237,.18);
+        background:rgba(255,255,255,.1);
       }
 
-     
-     
-      
-
-      .hello{font-size:clamp(18px,2.6vw,24px);letter-spacing:.5px;margin:0 0 .25em; color: #ff0000; }
-      .name{font-weight:800; font-size:clamp(28px,6vw,44px); margin:.1em 0 .2em; line-height:1.15;font-style: oblique;}
-      .sub{font-size:clamp(16px,2.4vw,22px);opacity:.9;margin:.35em 0 0;color: #ff0000;}
-      .time{font-size:clamp(12px,2vw,16px);opacity:.7;margin-top:.75em}
-
-      /* Floating hearts layer */
-      .hearts{position:fixed; inset:0; overflow:hidden; z-index:1; pointer-events:none}
-      .heart{
-        --size: 14px;           /* default; overridden per-node */
-        --duration: 6s;         /* overridden per-node */
-        position:absolute;
-        bottom: -10svh;         /* start just below */
-        left: 50%;
-        width: var(--size);
-        height: var(--size);
-        transform: rotate(-45deg);
-        animation: floatUp var(--duration) linear forwards;
-        will-change: transform, opacity;
-        filter: drop-shadow(0 8px 6px rgba(0, 0, 0, 0.15));
+      .modal-submit{
+        width:100%;padding:14px;border:none;border-radius:14px;
+        background:linear-gradient(135deg,var(--coral),var(--pink));
+        color:#fff;font-family:var(--font);font-size:15px;font-weight:700;
+        cursor:pointer;transition:all .35s cubic-bezier(.16,1,.3,1);
+        box-shadow:0 0 20px rgba(255,107,107,.2);
       }
-      /* Build heart shape using one square + 2 circles */
-      .heart, .heart::before, .heart::after{ background: var(--color); }
-      .heart::before, .heart::after{
-        content:""; position:absolute; width:var(--size); height:var(--size); border-radius:50%;
-      }
-      .heart::before{ top: calc(-50%); left: 0; }
-      .heart::after{ left: calc(50%); top: 0; }
+      .modal-submit:hover{transform:translateY(-2px);box-shadow:0 8px 32px rgba(255,107,107,.35)}
+      .modal-submit:active{transform:translateY(0) scale(.97)}
+      .modal-submit:focus-visible{outline:2px solid var(--coral);outline-offset:3px}
 
-      @keyframes floatUp{
-        0%{ transform: translateY(0) translateX(0) rotate(-45deg) scale(1); opacity:1; }
-        25%{ transform: translateY(-25svh) translateX(-6px) rotate(-45deg) scale(1.03); }
-        50%{ transform: translateY(-50svh) translateX(6px) rotate(-45deg) scale(1.06); }
-        75%{ transform: translateY(-75svh) translateX(-4px) rotate(-45deg) scale(1.08); }
-        100%{ transform: translateY(-105svh) translateX(2px) rotate(-45deg) scale(1.1); opacity:0.5; }
+      /* ========================================
+         FOOTER
+         ======================================== */
+      .page-footer{
+        position:fixed;bottom:clamp(60px,12vh,110px);
+        left:50%;transform:translateX(-50%);
+        z-index:10;font-size:10.5px;color:var(--t3);
+        letter-spacing:1.5px;text-transform:uppercase;
+        animation:fUp .8s 1.5s cubic-bezier(.16,1,.3,1) both;
       }
 
-      /* Respect users who prefer reduced motion */
-      @media (prefers-reduced-motion: reduce){
-        body{ animation:none }
-        .heart{ animation-duration: 0.001s }
+      /* ========================================
+         RESPONSIVE
+         ======================================== */
+      @media(max-width:420px){
+        .card{border-radius:22px}
+        .card-hero{padding:22px 18px 16px}
+        .card-body{padding:0 18px 20px}
+        .card-footer{padding:12px 18px 14px}
+        .btn-group{flex-direction:column;align-items:stretch}
+        .btn-primary,.btn-secondary{justify-content:center}
+        .clock{flex-direction:column;gap:4px}
       }
 
-      /* Small helper controls (optional) */
-      .actions{margin-top:10px}
-      .btn{appearance:none;
-         border:none;
-          border-radius:999px;
-           padding:.6em 1em; font-weight:600;
-            cursor:pointer; backdrop-filter: blur(6px);
-             background:rgba(255,255,255,.6);
-              box-shadow:0 3px 20px rgb(0, 255, 68) ;
-             animation: bgShift 1s ease-in-out infinite;
+      /* ========================================
+         ACCESSIBILITY
+         ======================================== */
+      @media(prefers-reduced-motion:reduce){
+        *,*::before,*::after{
+          animation-duration:.001s!important;
+          animation-delay:0s!important;
+          transition-duration:.001s!important;
+        }
+        #pCanvas{display:none}
       }
-              .btn:hover{
-        background:rgba(255,255,255,.8)
+
+      /* Skip-link (hidden but focusable) */
+      .skip-link{
+        position:fixed;top:-100%;left:50%;transform:translateX(-50%);
+        z-index:200;padding:10px 20px;
+        background:var(--purple);color:#fff;
+        border-radius:0 0 12px 12px;font-weight:700;
+        text-decoration:none;
       }
+      .skip-link:focus{top:0}
     </style>
   </head>
+
   <body>
+    <!-- Accessibility skip link -->
+    <a class="skip-link" href="#mainCard">Bỏ qua đến nội dung chính</a>
+
+    <!-- Background layers -->
+    <div class="aurora" aria-hidden="true">
+      <div class="aurora-orb"></div><div class="aurora-orb"></div>
+      <div class="aurora-orb"></div><div class="aurora-orb"></div>
+    </div>
+    <canvas id="pCanvas" aria-hidden="true"></canvas>
+
+    <!-- Hearts -->
     <div class="hearts" aria-hidden="true" id="heartsLayer"></div>
 
-    <main class="card" role="region" aria-label="Lời chào">
-      <p class="hello">HELLO</p>
-      <h1 class="name" id="nameDisplay">Friend</h1>
-      <p class="sub">Bạn vào đây có việc gì không? 🫵</p>
-      <a href="https://m.me/vu.manh.ky.826841" id="linkfb" target="_blank">nếu có thì bấm vào đây</a>
-      <p class="time" id="timeNow"></p>
-      <div class="actions">
-        <button class="btn" id="changeName">Đổi tên</button>
+    <!-- Waves -->
+    <div class="waves" aria-hidden="true">
+      <div class="wave">
+        <svg viewBox="0 0 1440 100" preserveAspectRatio="none" fill="none">
+          <path d="M0 45C240 80 480 10 720 45C960 80 1200 10 1440 45L1440 100L0 100Z" fill="rgba(124,58,237,.08)"/>
+        </svg>
       </div>
-    </main>
+      <div class="wave">
+        <svg viewBox="0 0 1440 100" preserveAspectRatio="none" fill="none">
+          <path d="M0 55C180 20 420 85 720 40C1020 -5 1260 70 1440 35L1440 100L0 100Z" fill="rgba(236,72,153,.06)"/>
+        </svg>
+      </div>
+    </div>
 
+    <!-- ===== MAIN CARD ===== -->
+    <div class="card-wrap">
+      <main class="card" id="mainCard" role="region" aria-label="Lời chào">
+        <div class="card-glow" id="cardGlow"></div>
+
+        <!-- HERO — Icon + Greeting + Name -->
+        <section class="card-hero">
+          <div class="icon-area">
+            <div class="icon-wrap" id="iconWrap" role="button" tabindex="0" aria-label="Gửi tim">
+              <svg viewBox="0 0 24 24" width="48" height="48" aria-hidden="true">
+                <defs><linearGradient id="iG" x1="0%" y1="0%" x2="100%" y2="100%">
+                  <stop offset="0%" stop-color="#ff6b6b"/><stop offset="100%" stop-color="#fbbf24"/>
+                </linearGradient></defs>
+                <path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z" fill="url(#iG)"/>
+              </svg>
+            </div>
+          </div>
+          <p class="hello">Xin chào</p>
+          <h1 class="name" id="nameDisplay">Friend</h1>
+        </section>
+
+        <div class="divider-line" aria-hidden="true"></div>
+
+        <!-- BODY — Message + Buttons -->
+        <section class="card-body">
+          <p class="message">Bạn vào đây có việc gì không?</p>
+          <div class="btn-group">
+            <a class="btn-primary" href="https://m.me/vu.manh.ky.826841" target="_blank" rel="noopener noreferrer" id="linkfb">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>
+              <span>Nhắn tin cho mình</span>
+            </a>
+            <button class="btn-secondary" id="changeName" type="button">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 20h9"/><path d="M16.5 3.5a2.121 2.121 0 0 1 3 3L7 19l-4 1 1-4L16.5 3.5z"/></svg>
+              Đổi tên
+            </button>
+          </div>
+        </section>
+
+        <!-- FOOTER — Clock -->
+        <section class="card-footer">
+          <div class="clock" aria-live="off">
+            <span class="clock-time">
+              <span id="hh">00</span><span class="clock-sep">:</span><span id="mm">00</span><span class="clock-sep">:</span><span id="ss">00</span>
+            </span>
+            <span class="clock-dot">·</span>
+            <span class="clock-date" id="clockDate">—</span>
+          </div>
+        </section>
+      </main>
+    </div>
+
+    <!-- Footer credit -->
+    <div class="page-footer" aria-hidden="true">Made with love</div>
+
+    <!-- ===== MODAL ===== -->
+    <div class="modal-overlay" id="modal">
+      <div class="modal" role="dialog" aria-modal="true" aria-labelledby="mT">
+        <svg class="modal-icon" viewBox="0 0 24 24" width="42" height="42" aria-hidden="true">
+          <path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z" fill="url(#iG)"/>
+        </svg>
+        <h2 id="mT">Bạn tên gì?</h2>
+        <p class="modal-desc">Nhập tên để mình gửi lời chào đặc biệt nhé</p>
+        <input class="modal-input" id="nameInput" type="text" placeholder="Nhập họ tên..." maxlength="64" autocomplete="off"/>
+        <button class="modal-submit" id="modalSubmit" type="button">Xác nhận</button>
+      </div>
+    </div>
+
+    <!-- ===============================================
+         SCRIPTS
+         =============================================== -->
     <script>
-      // ==== CONFIG ====
-      const COLORS = ["#e25555","#f06292","#ba68c8","#64b5f6","#4db6ac","#81c784","#ffd54f"]; // pastel-like
-      const MIN_SIZE = 12;   // px
-      const MAX_SIZE = 28;   // px (mobile) – scaled a bit on large screens below
-      const MIN_DUR = 4.5;   // s
-      const MAX_DUR = 9.0;   // s
-      const SPAWN_MS = 260;  // how often a heart is spawned
+    (() => {
+      'use strict';
 
-      const nameEl = document.getElementById('nameDisplay');
-      const timeEl = document.getElementById('timeNow');
-      const heartsLayer = document.getElementById('heartsLayer');
-      const changeNameBtn = document.getElementById('changeName');
+      /* ---- helpers ---- */
+      const rand = (a,b) => Math.random()*(b-a)+a;
+      const pick = a => a[(Math.random()*a.length)|0];
+      const $ = id => document.getElementById(id);
 
-      // Scale parameters for desktop for nicer density
-      const isDesktop = matchMedia('(pointer:fine)').matches && window.innerWidth >= 1024;
-      const sizeBoost = isDesktop ? 1.2 : 1.0;
+      /* ---- refs ---- */
+      const heartsEl  = $('heartsLayer');
+      const nameEl    = $('nameDisplay');
+      const iconWrap  = $('iconWrap');
+      const mainCard  = $('mainCard');
+      const cardGlow  = $('cardGlow');
+      const modalEl   = $('modal');
+      const nameInput = $('nameInput');
+      const modalSub  = $('modalSubmit');
+      const changeBtn = $('changeName');
+      const hhEl=$('hh'), mmEl=$('mm'), ssEl=$('ss'), dateEl=$('clockDate');
 
-      // Ask for name once on first load
-      const askName = () => {
-        const input = prompt('Nhập HỌ TÊN của bạn:');
-        const safe = (input || 'Friend').toString().trim().slice(0, 64);
-        nameEl.textContent = safe;
-        sendLog(safe);
-      };
-      askName();
+      const isDesk = matchMedia('(pointer:fine)').matches && innerWidth >= 1024;
+      const szK = isDesk ? 1.25 : 1;
 
-      // Change name on click
-      changeNameBtn.addEventListener('click', askName, {passive:true});
+      /* ================================================
+         PARTICLE CONSTELLATION (Canvas)
+         ================================================ */
+      const cv = $('pCanvas');
+      const cx = cv.getContext('2d');
+      let W, H;
+      const mouse = { x:-9e3, y:-9e3 };
+      const pcColors = ['124,58,237','236,72,153','251,191,36','34,211,238','52,211,153'];
+      const particles = [];
 
-      // Show current time (auto-updating each second)
-      const updateTime = () => {
-        const now = new Date();
-        timeEl.textContent = now.toLocaleString('vi-VN', {year:'numeric', month:'2-digit', day:'2-digit', hour:'2-digit', minute:'2-digit', second:'2-digit'});
-      };
-      updateTime();
-      setInterval(updateTime, 1000);
+      function resize() { W = cv.width = innerWidth; H = cv.height = innerHeight; }
+      resize();
+      addEventListener('resize', resize);
+      addEventListener('mousemove', e => { mouse.x=e.clientX; mouse.y=e.clientY; });
+      addEventListener('mouseleave', () => { mouse.x=-9e3; mouse.y=-9e3; });
+      // also react to touch
+      addEventListener('touchmove', e => {
+        const t = e.touches[0];
+        if(t){ mouse.x=t.clientX; mouse.y=t.clientY; }
+      }, {passive:true});
+      addEventListener('touchend', () => { mouse.x=-9e3; mouse.y=-9e3; });
 
-      // Send data to Google Apps Script (best-effort; no-cors)
-      function sendLog(name){
-        try{
-          const when = new Date().toLocaleString('vi-VN', {year:'numeric', month:'2-digit', day:'2-digit', hour:'2-digit', minute:'2-digit', second:'2-digit'});
-          fetch('https://script.google.com/macros/s/AKfycbyUDt5uVfC60IOvWE9DuNChQzoh6-HsULx-VJ-pr6M0wzi8rL0NZQXLR9H5_AKBjJ8XrA/exec',{
-            method:'POST', mode:'no-cors', headers:{'Content-Type':'application/x-www-form-urlencoded'},
-            body: 'name='+encodeURIComponent(name)+'&time='+encodeURIComponent(when)
-          });
-        }catch(e){/* ignore */}
+      const N = isDesk ? 55 : 22;
+      for(let i=0;i<N;i++){
+        particles.push({
+          x:rand(0,W), y:rand(0,H),
+          vx:(Math.random()-.5)*.3, vy:(Math.random()-.5)*.3,
+          r:rand(.8,2.2),
+          c:pcColors[i%pcColors.length],
+          a:rand(.15,.4)
+        });
       }
 
-      // Heart factory
-      function createHeart(){
-        const h = document.createElement('div');
-        h.className = 'heart';
-        const size = (Math.random()*(MAX_SIZE - MIN_SIZE) + MIN_SIZE) * sizeBoost;
-        const dur  = (Math.random()*(MAX_DUR - MIN_DUR) + MIN_DUR);
-        h.style.setProperty('--size', size + 'px');
-        h.style.setProperty('--duration', dur + 's');
-        h.style.setProperty('--color', COLORS[(Math.random()*COLORS.length)|0]);
-        // random horizontal start
-        const startLeft = Math.random()*100; // vw percent
-        h.style.left = startLeft + 'vw';
-        heartsLayer.appendChild(h);
-        // Clean up when finished
-        const rmAfter = (dur*1000) + 400; // give some buffer
-        setTimeout(()=> h.remove(), rmAfter);
-      }
+      function drawP(){
+        cx.clearRect(0,0,W,H);
+        const cDist = isDesk ? 115 : 90;
+        for(let i=0;i<particles.length;i++){
+          const p=particles[i];
+          p.x+=p.vx; p.y+=p.vy;
+          if(p.x<0)p.x=W; if(p.x>W)p.x=0;
+          if(p.y<0)p.y=H; if(p.y>H)p.y=0;
 
-      // Use rAF ticker for smoother spawning & better battery
-      let lastSpawn = 0;
-      function tick(ts){
-        if(!document.hidden){
-          if(ts - lastSpawn > SPAWN_MS){
-            createHeart();
-            if(Math.random() < 0.35) createHeart(); // occasional double spawn for variety
-            lastSpawn = ts;
+          const dx=p.x-mouse.x, dy=p.y-mouse.y;
+          const d=Math.hypot(dx,dy);
+          if(d<150 && d>0){
+            const f=(150-d)/150*.012;
+            p.vx+=dx/d*f; p.vy+=dy/d*f;
           }
+          p.vx*=.996; p.vy*=.996;
+
+          cx.beginPath();
+          cx.arc(p.x,p.y,p.r,0,6.2832);
+          cx.fillStyle=`rgba(${p.c},${p.a})`;
+          cx.fill();
+
+          for(let j=i+1;j<particles.length;j++){
+            const q=particles[j];
+            const dd=Math.hypot(p.x-q.x,p.y-q.y);
+            if(dd<cDist){
+              cx.beginPath();
+              cx.moveTo(p.x,p.y); cx.lineTo(q.x,q.y);
+              cx.strokeStyle=`rgba(${p.c},${(1-dd/cDist)*.07})`;
+              cx.lineWidth=.5;
+              cx.stroke();
+            }
+          }
+        }
+        requestAnimationFrame(drawP);
+      }
+      requestAnimationFrame(drawP);
+
+      /* ================================================
+         HEARTS
+         ================================================ */
+      const HUES = [-40,-20,0,15,30,50,80,160,200,260]; // diverse hue range
+      const MIN_SZ=11, MAX_SZ=26, MIN_DUR=6.5, MAX_DUR=11.5, SPAWN=340;
+
+      function createHeart(){
+        const h=document.createElement('div');
+        h.className='heart';
+        const sz=rand(MIN_SZ,MAX_SZ)*szK;
+        const dur=rand(MIN_DUR,MAX_DUR);
+        h.style.cssText=`--sz:${sz}px;--dur:${dur}s;--dx:${rand(-35,35)}px;--op:${rand(.45,.85)};--gl:${rand(5,13)}px;--hue:${pick(HUES)}deg;left:${rand(2,98)}vw;`;
+        heartsEl.appendChild(h);
+        setTimeout(()=>h.remove(), dur*1000+600);
+      }
+
+      let last=0;
+      function tick(ts){
+        if(!document.hidden && ts-last>SPAWN){
+          createHeart();
+          if(Math.random()<.2) createHeart();
+          last=ts;
         }
         requestAnimationFrame(tick);
       }
       requestAnimationFrame(tick);
+      document.addEventListener('visibilitychange',()=>{last=performance.now()});
 
-      // Pause spawns when tab hidden (saves battery)
-      document.addEventListener('visibilitychange', ()=>{ lastSpawn = performance.now(); });
+      /* Parallax */
+      if(isDesk){
+        document.addEventListener('mousemove',e=>{
+          const mx=(e.clientX/W-.5)*2, my=(e.clientY/H-.5)*2;
+          heartsEl.style.transform=`translate(${mx*10}px,${my*10}px)`;
+        });
+      }
+
+      /* ---- Burst ---- */
+      function burstAt(cx,cy,n=10){
+        for(let i=0;i<n;i++){
+          const a=Math.PI*2/n*i+rand(-.3,.3);
+          const dist=rand(35,85);
+          const el=document.createElement('div');
+          el.className='heart-burst';
+          el.style.cssText=`--sz:${rand(8,16)}px;--hue:${pick(HUES)}deg;--bx:${Math.cos(a)*dist}px;--by:${Math.sin(a)*dist}px;left:${cx}px;top:${cy}px;`;
+          document.body.appendChild(el);
+          setTimeout(()=>el.remove(),850);
+        }
+      }
+
+      /* ================================================
+         ICON INTERACTION
+         ================================================ */
+      function onIcon(){
+        iconWrap.classList.remove('pop');
+        void iconWrap.offsetWidth;
+        iconWrap.classList.add('pop');
+        setTimeout(()=>iconWrap.classList.remove('pop'),600);
+        const r=iconWrap.getBoundingClientRect();
+        burstAt(r.left+r.width/2, r.top+r.height/2, 12);
+      }
+      iconWrap.addEventListener('click', onIcon);
+      iconWrap.addEventListener('keydown', e=>{if(e.key==='Enter'||e.key===' '){e.preventDefault();onIcon()}});
+
+      /* ================================================
+         CARD TILT + CURSOR GLOW (desktop)
+         ================================================ */
+      if(isDesk){
+        mainCard.addEventListener('mousemove',e=>{
+          const r=mainCard.getBoundingClientRect();
+          const x=(e.clientX-r.left)/r.width-.5;
+          const y=(e.clientY-r.top)/r.height-.5;
+          mainCard.style.transform=`perspective(900px) rotateY(${x*5}deg) rotateX(${y*-5}deg)`;
+          cardGlow.style.left=(e.clientX-r.left)+'px';
+          cardGlow.style.top=(e.clientY-r.top)+'px';
+        });
+        mainCard.addEventListener('mouseleave',()=>{
+          mainCard.style.transition='transform .5s cubic-bezier(.16,1,.3,1)';
+          mainCard.style.transform='perspective(900px) rotateY(0) rotateX(0)';
+          setTimeout(()=>{mainCard.style.transition=''},500);
+        });
+      }
+
+      /* ================================================
+         CLOCK
+         ================================================ */
+      const pad=n=>String(n).padStart(2,'0');
+      const MO=['Tháng 1','Tháng 2','Tháng 3','Tháng 4','Tháng 5','Tháng 6','Tháng 7','Tháng 8','Tháng 9','Tháng 10','Tháng 11','Tháng 12'];
+      const DA=['Chủ nhật','Thứ 2','Thứ 3','Thứ 4','Thứ 5','Thứ 6','Thứ 7'];
+      function clock(){
+        const d=new Date();
+        hhEl.textContent=pad(d.getHours());
+        mmEl.textContent=pad(d.getMinutes());
+        ssEl.textContent=pad(d.getSeconds());
+        dateEl.textContent=`${DA[d.getDay()]}, ${d.getDate()} ${MO[d.getMonth()]} ${d.getFullYear()}`;
+      }
+      clock(); setInterval(clock,1000);
+
+      /* ================================================
+         MODAL
+         ================================================ */
+      function openM(){
+        modalEl.classList.add('open');
+        nameInput.value='';
+        setTimeout(()=>nameInput.focus(),120);
+      }
+      function closeM(){ modalEl.classList.remove('open'); }
+
+      function submit(){
+        const raw=nameInput.value.trim().slice(0,64);
+        const name=raw||'Friend';
+        nameEl.textContent=name;
+        closeM();
+        sendLog(name);
+        const r=mainCard.getBoundingClientRect();
+        burstAt(r.left+r.width/2, r.top+r.height*.3, 14);
+        for(let i=0;i<6;i++) setTimeout(createHeart,i*70);
+      }
+
+      modalSub.addEventListener('click',submit);
+      nameInput.addEventListener('keydown',e=>{if(e.key==='Enter')submit()});
+      modalEl.addEventListener('click',e=>{if(e.target===modalEl)submit()});
+
+      openM(); // first visit
+      changeBtn.addEventListener('click',openM);
+
+      /* ================================================
+         LOG
+         ================================================ */
+      function sendLog(name){
+        try{
+          const when=new Date().toLocaleString('vi-VN',{year:'numeric',month:'2-digit',day:'2-digit',hour:'2-digit',minute:'2-digit',second:'2-digit'});
+          fetch('https://script.google.com/macros/s/AKfycbyUDt5uVfC60IOvWE9DuNChQzoh6-HsULx-VJ-pr6M0wzi8rL0NZQXLR9H5_AKBjJ8XrA/exec',{
+            method:'POST',mode:'no-cors',
+            headers:{'Content-Type':'application/x-www-form-urlencoded'},
+            body:'name='+encodeURIComponent(name)+'&time='+encodeURIComponent(when)
+          });
+        }catch(_){}
+      }
+    })();
     </script>
   </body>
 </html>
