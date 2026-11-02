@@ -2,790 +2,1145 @@
 <html lang="vi">
   <head>
     <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <title>Tim ❤️💕🫶</title>
-    <meta name="description" content="Một trang chào đón đặc biệt dành cho bạn" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Vũ Mạnh Kỳ (kyvu09) — Profile & Memories</title>
+    <meta
+      name="description"
+      content="Trang giới thiệu bản thân, kỷ niệm và liên kết mạng xã hội của Vũ Mạnh Kỳ (kyvu09)."
+    />
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet" />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:ital,wght@0,400;0,500;0,600;0,700;0,800;1,800;1,900&family=JetBrains+Mono:wght@500;700&display=swap"
+      rel="stylesheet"
+    />
+
     <style>
-      /* ========================================
-         DESIGN TOKENS
-         ======================================== */
+      /* ========================================================
+         DESIGN TOKENS & NEO-MINIMALISM CLEAN SYSTEM
+         ======================================================== */
       :root {
-        --font: 'Inter', system-ui, -apple-system, sans-serif;
-        /* Deep vivid palette */
-        --bg: #080015;
-        --purple: #7c3aed;  --purple-dim: rgba(124,58,237,0.35);
-        --pink: #ec4899;    --pink-dim: rgba(236,72,153,0.35);
-        --coral: #ff6b6b;   --coral-dim: rgba(255,107,107,0.35);
-        --amber: #fbbf24;   --amber-dim: rgba(251,191,36,0.35);
-        --cyan: #22d3ee;    --cyan-dim: rgba(34,211,238,0.30);
-        --emerald: #34d399;
-        --rose: #fb7185;
-        --fuchsia: #d946ef;
-        /* Glass */
-        --g-bg: rgba(255,255,255,0.05);
-        --g-border: rgba(255,255,255,0.08);
-        --g-inner: rgba(255,255,255,0.035);
-        /* Text */
-        --t1: rgba(255,255,255,0.95);
-        --t2: rgba(255,255,255,0.72);
-        --t3: rgba(255,255,255,0.46);
-        /* Radius */
-        --r-card: 28px;
-        --r-btn: 14px;
-        --r-pill: 999px;
+        --font-main: 'Plus Jakarta Sans', system-ui, -apple-system, sans-serif;
+        --font-mono: 'JetBrains Mono', monospace;
+
+        --bg-page: #edf1f7;
+        --card-bg: #ffffff;
+        --border-dark: #0f172a;
+        --shadow-dark: #0f172a;
+
+        --tile-bg: #f8fafc;
+        --tile-hover-bg: #f1f5f9;
+        --tile-border: #e2e8f0;
+
+        --text-primary: #0f172a;
+        --text-muted: #64748b;
+        --text-sub: #475569;
+
+        --accent-blue: #2563eb;
+        --accent-emerald: #10b981;
+        --accent-purple: #7c3aed;
+        --accent-amber: #f59e0b;
+
+        --radius-card: 36px;
+        --radius-tile: 18px;
+        --radius-btn: 9999px;
       }
 
-      /* ========================================
-         RESET
-         ======================================== */
-      *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
-      html,body{height:100%}
+      *,
+      *::before,
+      *::after {
+        box-sizing: border-box;
+        margin: 0;
+        padding: 0;
+      }
 
       body {
-        min-height: 100svh;
-        font-family: var(--font);
-        color: var(--t1);
+        font-family: var(--font-main);
+        background-color: var(--bg-page);
+        color: var(--text-primary);
+        min-height: 100vh;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        padding: 40px 16px;
+        position: relative;
+        overflow-x: hidden;
+        /* Subtle modern ambient background */
+        background-image: 
+          radial-gradient(circle at 10% 20%, rgba(37, 99, 235, 0.06) 0%, transparent 40%),
+          radial-gradient(circle at 90% 80%, rgba(124, 58, 237, 0.05) 0%, transparent 40%),
+          radial-gradient(#cbd5e1 1px, transparent 1px);
+        background-size: 100% 100%, 100% 100%, 28px 28px;
+      }
+
+      /* Container */
+      .page-wrapper {
+        width: 100%;
+        max-width: 620px;
+        margin: 0 auto;
+        position: relative;
+        z-index: 1;
+      }
+
+      /* ========================================================
+         MAIN CLEAN NEO-CARD
+         ======================================================== */
+      .neo-card {
+        background: var(--card-bg);
+        border: 2.5px solid var(--border-dark);
+        border-radius: 40px;
+        box-shadow: 12px 14px 0px var(--shadow-dark);
+        position: relative;
+        overflow: hidden;
+        transition: transform 0.25s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+      }
+
+      .neo-card:hover {
+        transform: translate(-2px, -2px);
+        box-shadow: 14px 16px 0px var(--shadow-dark);
+      }
+
+      .card-inner {
+        padding: 44px 34px 28px;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        text-align: center;
+      }
+
+      /* ========================================================
+         TOP LOGO BADGE (Like AUTO_✏️ in screenshot)
+         ======================================================== */
+      .top-badge-wrapper {
+        margin-bottom: 24px;
+        position: relative;
+      }
+
+      .top-badge {
+        width: 90px;
+        height: 90px;
+        border: 2.5px solid var(--border-dark);
+        border-radius: 26px;
+        background: #ffffff;
+        box-shadow: 3px 4px 0px var(--border-dark);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        position: relative;
+        overflow: hidden;
+        transition: transform 0.25s ease;
+      }
+
+      .top-badge:hover {
+        transform: rotate(-3deg) scale(1.05);
+      }
+
+      .avatar-img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+      }
+
+      .badge-decor {
+        position: absolute;
+        top: -6px;
+        right: -8px;
+        background: #0f172a;
+        color: #ffffff;
+        font-family: var(--font-mono);
+        font-size: 0.68rem;
+        font-weight: 700;
+        padding: 2px 7px;
+        border-radius: 999px;
+        border: 2px solid #ffffff;
+        box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+      }
+
+      /* ========================================================
+         HEADER TYPOGRAPHY (Italic uppercase punchy heading)
+         ======================================================== */
+      .main-title {
+        font-size: clamp(2rem, 5.5vw, 2.75rem);
+        font-weight: 900;
+        font-style: italic;
+        text-transform: uppercase;
+        color: var(--text-primary);
+        letter-spacing: -0.8px;
+        line-height: 1.1;
+        margin-bottom: 8px;
+      }
+
+      .user-handle {
+        font-family: var(--font-mono);
+        font-size: 0.88rem;
+        color: var(--accent-blue);
+        font-weight: 700;
+        margin-bottom: 12px;
+        display: inline-block;
+        background: #eff6ff;
+        padding: 3px 12px;
+        border-radius: 999px;
+        border: 1px solid #bfdbfe;
+      }
+
+      .main-subtitle {
+        font-size: 1.02rem;
+        color: var(--text-sub);
+        font-weight: 500;
+        max-width: 520px;
+        line-height: 1.55;
+        margin-bottom: 26px;
+      }
+
+      /* ========================================================
+         TAB SWITCHER (Clean Segmented Control)
+         ======================================================== */
+      .tabs-control {
+        display: flex;
+        background: #f1f5f9;
+        border: 1.5px solid #cbd5e1;
+        padding: 4px;
+        border-radius: var(--radius-btn);
+        margin-bottom: 26px;
+        width: 100%;
+        max-width: 480px;
+        gap: 4px;
+      }
+
+      .tab-btn {
+        flex: 1;
+        padding: 9px 12px;
+        border: none;
+        background: transparent;
+        color: var(--text-muted);
+        font-family: var(--font-main);
+        font-size: 0.84rem;
+        font-weight: 700;
+        text-transform: uppercase;
+        letter-spacing: 0.5px;
+        border-radius: var(--radius-btn);
+        cursor: pointer;
+        transition: all 0.2s ease;
+      }
+
+      .tab-btn:hover {
+        color: var(--text-primary);
+      }
+
+      .tab-btn.active {
+        background: #ffffff;
+        color: var(--text-primary);
+        border: 1.5px solid var(--border-dark);
+        box-shadow: 2px 2px 0px var(--border-dark);
+      }
+
+      /* ========================================================
+         2x2 FEATURE TILES GRID (Matching Screenshot)
+         ======================================================== */
+      .tiles-grid {
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
+        gap: 16px;
+        width: 100%;
+        margin-bottom: 30px;
+      }
+
+      .feature-tile {
+        background: var(--tile-bg);
+        border: 1.5px solid var(--tile-border);
+        border-radius: var(--radius-tile);
+        padding: 18px 16px;
+        display: flex;
+        align-items: flex-start;
+        text-align: left;
+        gap: 14px;
+        text-decoration: none;
+        color: inherit;
+        transition: all 0.22s ease;
+        position: relative;
+        cursor: pointer;
+      }
+
+      .feature-tile:hover {
+        background: var(--tile-hover-bg);
+        border-color: #cbd5e1;
+        transform: translateY(-2px);
+        box-shadow: 0 6px 16px rgba(15, 23, 42, 0.05);
+      }
+
+      .tile-icon-box {
+        width: 46px;
+        height: 46px;
+        border-radius: 14px;
+        background: #ffffff;
+        border: 1.5px solid #e2e8f0;
+        box-shadow: 0 4px 10px rgba(0, 0, 0, 0.04);
         display: grid;
         place-items: center;
-        overflow: hidden;
-        background: var(--bg);
+        flex-shrink: 0;
+        color: var(--text-primary);
+        transition: transform 0.2s ease;
       }
 
-      /* ========================================
-         AURORA GRADIENT ORBS
-         ======================================== */
-      .aurora{position:fixed;inset:0;z-index:0}
-      .aurora-orb{position:absolute;border-radius:50%;filter:blur(85px);will-change:transform;mix-blend-mode:screen}
+      .feature-tile:hover .tile-icon-box {
+        transform: scale(1.08);
+      }
 
-      .aurora-orb:nth-child(1){width:52vmax;height:52vmax;top:-16%;left:-10%;
-        background:radial-gradient(circle,var(--purple),transparent 68%);opacity:.5;
-        animation:ao1 15s ease-in-out infinite alternate}
-      .aurora-orb:nth-child(2){width:46vmax;height:46vmax;bottom:-20%;right:-12%;
-        background:radial-gradient(circle,var(--pink) 0%,var(--fuchsia) 35%,transparent 70%);opacity:.32;
-        animation:ao2 18s ease-in-out infinite alternate}
-      .aurora-orb:nth-child(3){width:38vmax;height:38vmax;top:38%;left:48%;
-        background:radial-gradient(circle,var(--coral) 0%,transparent 70%);opacity:.2;
-        animation:ao3 22s ease-in-out infinite alternate}
-      .aurora-orb:nth-child(4){width:30vmax;height:30vmax;top:5%;right:15%;
-        background:radial-gradient(circle,var(--cyan),transparent 68%);opacity:.18;
-        animation:ao1 20s ease-in-out infinite alternate-reverse}
+      .tile-content {
+        flex: 1;
+        min-width: 0;
+      }
 
-      @keyframes ao1{to{transform:translate(10vw,8vh) scale(1.2)}}
-      @keyframes ao2{to{transform:translate(-12vw,-10vh) scale(1.25)}}
-      @keyframes ao3{to{transform:translate(6vw,-14vh) scale(1.15)}}
+      .tile-title {
+        font-size: 0.88rem;
+        font-weight: 800;
+        text-transform: uppercase;
+        letter-spacing: 0.4px;
+        color: var(--text-primary);
+        margin-bottom: 4px;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+      }
 
-      /* ========================================
-         PARTICLE CANVAS (constellation)
-         ======================================== */
-      #pCanvas{position:fixed;inset:0;z-index:1;pointer-events:none}
+      .tile-arrow {
+        font-size: 0.85rem;
+        color: var(--text-muted);
+        opacity: 0;
+        transform: translateX(-4px);
+        transition: all 0.2s ease;
+      }
+      .feature-tile:hover .tile-arrow {
+        opacity: 1;
+        transform: translateX(0);
+        color: var(--accent-blue);
+      }
 
-      /* ========================================
-         HEARTS — SVG data-URI + hue-rotate
-         ======================================== */
-      .hearts{position:fixed;inset:0;z-index:3;pointer-events:none;overflow:hidden;
-        transition:transform .12s ease-out}
+      .tile-desc {
+        font-size: 0.8rem;
+        color: var(--text-muted);
+        line-height: 1.45;
+        font-weight: 500;
+      }
 
-      .heart {
+      /* Tab Content Animation */
+      .tab-panel {
+        display: none;
+        width: 100%;
+        animation: fadeIn 0.3s ease forwards;
+      }
+      .tab-panel.active {
+        display: block;
+      }
+      @keyframes fadeIn {
+        from { opacity: 0; transform: translateY(6px); }
+        to { opacity: 1; transform: translateY(0); }
+      }
+
+      /* ========================================================
+         MAIN BIG BUTTON (Like 'BẮT ĐẦU SÁNG TÁC NGAY!')
+         ======================================================== */
+      .cta-group {
+        width: 100%;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 12px;
+      }
+
+      .btn-main-cta {
+        width: 100%;
+        max-width: 520px;
+        padding: 18px 32px;
+        background: #0e131f;
+        color: #ffffff;
+        border: none;
+        border-radius: var(--radius-btn);
+        font-family: var(--font-main);
+        font-size: 1.05rem;
+        font-weight: 900;
+        text-transform: uppercase;
+        letter-spacing: 0.8px;
+        text-decoration: none;
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        gap: 10px;
+        cursor: pointer;
+        box-shadow: 0 8px 24px rgba(14, 19, 31, 0.28);
+        transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+        border: 2px solid transparent;
+      }
+
+      .btn-main-cta:hover {
+        transform: translateY(-2px);
+        background: #1e293b;
+        box-shadow: 0 12px 30px rgba(14, 19, 31, 0.35);
+      }
+
+      .btn-main-cta:active {
+        transform: translateY(1px);
+        box-shadow: 0 4px 12px rgba(14, 19, 31, 0.2);
+      }
+
+      /* Secondary Quick Links */
+      .secondary-links {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 10px;
+        justify-content: center;
+      }
+
+      .btn-pill {
+        display: inline-flex;
+        align-items: center;
+        gap: 6px;
+        padding: 9px 18px;
+        border-radius: 999px;
+        background: #ffffff;
+        border: 1.5px solid #cbd5e1;
+        color: var(--text-sub);
+        font-size: 0.82rem;
+        font-weight: 700;
+        text-decoration: none;
+        cursor: pointer;
+        transition: all 0.2s ease;
+      }
+
+      .btn-pill:hover {
+        border-color: var(--border-dark);
+        color: var(--text-primary);
+        transform: translateY(-1px);
+      }
+
+      /* ========================================================
+         BOTTOM BAR (MINIMALIST · CONSISTENCY · AI POWERED)
+         ======================================================== */
+      .card-bottom-bar {
+        border-top: 2px solid var(--border-dark);
+        padding: 16px 28px;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        background: #fafbfd;
+      }
+
+      .bottom-tags {
+        display: flex;
+        align-items: center;
+        gap: 14px;
+        font-family: var(--font-main);
+        font-size: 0.72rem;
+        font-weight: 800;
+        text-transform: uppercase;
+        letter-spacing: 2px;
+        color: #94a3b8;
+      }
+
+      .bottom-tags span {
+        display: inline-block;
+      }
+
+      .bottom-clock {
+        font-family: var(--font-mono);
+        font-size: 0.75rem;
+        font-weight: 600;
+        color: var(--text-sub);
+        display: flex;
+        align-items: center;
+        gap: 6px;
+      }
+
+      .clock-dot {
+        width: 7px;
+        height: 7px;
+        border-radius: 50%;
+        background: var(--accent-emerald);
+        display: inline-block;
+      }
+
+      /* ========================================================
+         MODAL DETAIL VIEW (For Kỷ niệm / Chi tiết)
+         ======================================================== */
+      .modal-backdrop {
+        position: fixed;
+        inset: 0;
+        background: rgba(15, 23, 42, 0.6);
+        backdrop-filter: blur(8px);
+        display: grid;
+        place-items: center;
+        padding: 20px;
+        z-index: 100;
+        opacity: 0;
+        visibility: hidden;
+        transition: all 0.25s ease;
+      }
+
+      .modal-backdrop.show {
+        opacity: 1;
+        visibility: visible;
+      }
+
+      .modal-box {
+        background: #ffffff;
+        border: 2.5px solid var(--border-dark);
+        border-radius: 28px;
+        box-shadow: 8px 10px 0px var(--border-dark);
+        max-width: 480px;
+        width: 100%;
+        padding: 30px 26px;
+        position: relative;
+        transform: translateY(20px) scale(0.96);
+        transition: transform 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+      }
+
+      .modal-backdrop.show .modal-box {
+        transform: translateY(0) scale(1);
+      }
+
+      .modal-close-btn {
         position: absolute;
-        bottom: -14svh;
-        width: var(--sz); height: var(--sz);
-        background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cdefs%3E%3CradialGradient id='g' cx='38%25' cy='28%25' r='68%25'%3E%3Cstop offset='0%25' stop-color='%23fff' stop-opacity='.38'/%3E%3Cstop offset='100%25' stop-color='%23ff4081' stop-opacity='1'/%3E%3C/radialGradient%3E%3C/defs%3E%3Cpath d='M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z' fill='url(%23g)'/%3E%3C/svg%3E") no-repeat center/contain;
-        filter: hue-rotate(var(--hue,0deg)) drop-shadow(0 0 var(--gl,8px) rgba(255,64,129,.45));
-        animation: hFloat var(--dur) cubic-bezier(.22,.61,.36,1) forwards;
-        will-change: transform, opacity;
+        top: 18px;
+        right: 18px;
+        width: 32px;
+        height: 32px;
+        border-radius: 50%;
+        border: 1.5px solid var(--border-dark);
+        background: #ffffff;
+        display: grid;
+        place-items: center;
+        cursor: pointer;
+        font-weight: 800;
+        transition: all 0.15s ease;
+      }
+      .modal-close-btn:hover {
+        background: #f1f5f9;
+        transform: scale(1.1);
       }
 
-      @keyframes hFloat {
-        0%   {transform:translateY(0)       translateX(0)                    scale(0) rotate3d(0,1,0,0deg); opacity:0}
-        7%   {transform:translateY(-7svh)   translateX(0)                    scale(1) rotate3d(0,1,0,0deg); opacity:var(--op,.8)}
-        30%  {transform:translateY(-30svh)  translateX(calc(var(--dx)*-1))   scale(1.04) rotate3d(0,1,0,20deg)}
-        55%  {transform:translateY(-55svh)  translateX(var(--dx))            scale(1.06) rotate3d(0,1,0,-14deg)}
-        78%  {transform:translateY(-80svh)  translateX(calc(var(--dx)*-.5))  scale(1.02) rotate3d(0,1,0,8deg); opacity:calc(var(--op,.8)*.4)}
-        100% {transform:translateY(-118svh) translateX(calc(var(--dx)*.3))   scale(.8)  rotate3d(0,1,0,0deg); opacity:0}
+      .modal-badge {
+        display: inline-block;
+        font-family: var(--font-mono);
+        font-size: 0.72rem;
+        font-weight: 700;
+        text-transform: uppercase;
+        background: #eff6ff;
+        color: var(--accent-blue);
+        padding: 3px 10px;
+        border-radius: 999px;
+        border: 1px solid #bfdbfe;
+        margin-bottom: 12px;
       }
 
-      /* Burst hearts */
-      .heart-burst{
-        position:fixed;
-        width:var(--sz,12px);height:var(--sz,12px);
-        background:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cdefs%3E%3CradialGradient id='g' cx='38%25' cy='28%25' r='68%25'%3E%3Cstop offset='0%25' stop-color='%23fff' stop-opacity='.38'/%3E%3Cstop offset='100%25' stop-color='%23ff4081' stop-opacity='1'/%3E%3C/radialGradient%3E%3C/defs%3E%3Cpath d='M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z' fill='url(%23g)'/%3E%3C/svg%3E") no-repeat center/contain;
-        filter:hue-rotate(var(--hue,0deg)) drop-shadow(0 0 6px rgba(255,64,129,.5));
-        animation:burst .75s cubic-bezier(.16,1,.3,1) forwards;
-        pointer-events:none; z-index:99;
-      }
-      @keyframes burst{
-        0%  {transform:translate(0,0) scale(1);opacity:1}
-        100%{transform:translate(var(--bx),var(--by)) scale(.2);opacity:0}
+      .modal-title {
+        font-size: 1.35rem;
+        font-weight: 800;
+        margin-bottom: 12px;
+        color: var(--text-primary);
       }
 
-      /* ========================================
-         ANIMATED WAVES (bottom)
-         ======================================== */
-      .waves{position:fixed;bottom:0;left:0;width:100%;height:clamp(60px,12vh,110px);z-index:4;pointer-events:none;overflow:hidden}
-      .wave{position:absolute;bottom:0;width:200%;height:100%}
-      .wave svg{display:block;width:100%;height:100%}
-      .wave:nth-child(1){animation:waveX 10s linear infinite;opacity:.35}
-      .wave:nth-child(2){animation:waveX 15s linear infinite reverse;opacity:.2;bottom:-8px}
-      @keyframes waveX{to{transform:translateX(-50%)}}
-
-      /* ========================================
-         CARD — Bento glass with sections
-         ======================================== */
-      .card-wrap{position:relative;z-index:10;
-        animation:entrance .9s cubic-bezier(.16,1,.3,1) both}
-      @keyframes entrance{
-        from{opacity:0;transform:translateY(48px) scale(.9)}
-        to{opacity:1;transform:translateY(0) scale(1)}}
-
-      .card{
-        position:relative;
-        display:flex;flex-direction:column;align-items:center;
-        max-width:min(92vw,480px); width:100%;
-        border-radius:var(--r-card);
-        background:var(--g-bg);
-        backdrop-filter:blur(44px) saturate(1.5);
-        -webkit-backdrop-filter:blur(44px) saturate(1.5);
-        border:1px solid var(--g-border);
-        overflow:hidden;
-        transition:transform .5s cubic-bezier(.16,1,.3,1);
+      .modal-desc {
+        color: var(--text-sub);
+        font-size: 0.92rem;
+        line-height: 1.6;
+        margin-bottom: 20px;
       }
 
-      /* Cursor-follow light */
-      .card-glow{
-        position:absolute;width:280px;height:280px;border-radius:50%;
-        background:radial-gradient(circle,rgba(255,255,255,.07),transparent 70%);
-        pointer-events:none;opacity:0;transition:opacity .35s;
-        transform:translate(-50%,-50%);z-index:0;
-      }
-      .card:hover .card-glow{opacity:1}
-
-      /* Shimmer */
-      .card::before{
-        content:'';position:absolute;top:0;left:-110%;width:110%;height:100%;
-        background:linear-gradient(100deg,transparent 20%,rgba(255,255,255,.03) 44%,rgba(255,255,255,.09) 50%,rgba(255,255,255,.03) 56%,transparent 80%);
-        animation:shimmer 8s 2s ease-in-out infinite;pointer-events:none;z-index:1;
-      }
-      @keyframes shimmer{0%,100%{left:-110%}50%{left:110%}}
-
-      /* Gradient border spin */
-      .card::after{
-        content:'';position:absolute;inset:-1px;border-radius:var(--r-card);
-        background:conic-gradient(from var(--ba,0deg),var(--purple),var(--pink),var(--coral),var(--amber),var(--cyan),var(--purple));
-        -webkit-mask:linear-gradient(#fff 0 0) content-box,linear-gradient(#fff 0 0);
-        -webkit-mask-composite:xor;mask-composite:exclude;
-        padding:1px;opacity:.3;pointer-events:none;z-index:0;
-        animation:borderSpin 10s linear infinite;
-      }
-      @keyframes borderSpin{to{--ba:360deg}}
-      @property --ba{syntax:'<angle>';initial-value:0deg;inherits:false}
-
-      /* Breathing glow */
-      @keyframes breathe{
-        0%,100%{box-shadow:0 0 50px rgba(124,58,237,.12),0 8px 32px rgba(8,0,21,.15)}
-        50%    {box-shadow:0 0 80px rgba(124,58,237,.22),0 8px 32px rgba(8,0,21,.15)}
-      }
-      .card{animation:entrance .9s cubic-bezier(.16,1,.3,1) both, breathe 5s 1.2s ease-in-out infinite}
-
-      /* ---- CARD SECTIONS ---- */
-      .card-hero{
-        position:relative;z-index:2;
-        width:100%;text-align:center;
-        padding:clamp(28px,5vw,44px) clamp(24px,5vw,44px) 20px;
-      }
-      .card-body{
-        position:relative;z-index:2;
-        width:100%;text-align:center;
-        padding:0 clamp(24px,5vw,44px) clamp(24px,4vw,36px);
-      }
-      .card-footer{
-        position:relative;z-index:2;
-        width:100%;
-        padding:14px clamp(24px,5vw,44px) 18px;
-        background:var(--g-inner);
-        border-top:1px solid rgba(255,255,255,.04);
+      .modal-tags {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 6px;
+        margin-bottom: 22px;
       }
 
-      /* ---- ICON ---- */
-      .icon-wrap{
-        display:inline-flex;cursor:pointer;
-        -webkit-tap-highlight-color:transparent;
-        animation:iconBob 3.5s ease-in-out infinite;
-      }
-      .icon-wrap svg{
-        filter:drop-shadow(0 0 16px rgba(244,114,182,.5));
-        transition:transform .35s cubic-bezier(.175,.885,.32,1.275);
-      }
-      .icon-wrap:hover svg{transform:scale(1.18)}
-      .icon-wrap.pop svg{animation:iconPop .55s cubic-bezier(.175,.885,.32,1.275)}
-      @keyframes iconBob{0%,100%{transform:translateY(0)}50%{transform:translateY(-7px)}}
-      @keyframes iconPop{0%{transform:scale(1)}30%{transform:scale(1.5)}60%{transform:scale(.85)}100%{transform:scale(1)}}
-
-      .icon-area{margin-bottom:18px;animation:fUp .7s .15s cubic-bezier(.16,1,.3,1) both}
-
-      /* ---- TYPOGRAPHY ---- */
-      .hello{
-        font-size:clamp(11px,1.6vw,13px);font-weight:700;
-        letter-spacing:5px;text-transform:uppercase;
-        color:var(--coral);margin:0 0 8px;
-        animation:fUp .7s .3s cubic-bezier(.16,1,.3,1) both;
+      .modal-tag-pill {
+        font-family: var(--font-mono);
+        font-size: 0.72rem;
+        background: #f1f5f9;
+        color: #475569;
+        padding: 3px 9px;
+        border-radius: 6px;
+        border: 1px solid #cbd5e1;
       }
 
-      .name{
-        font-weight:900;font-size:clamp(38px,9vw,58px);line-height:1.08;
-        margin:0 0 0;
-        background:linear-gradient(135deg,#f472b6 0%,#d946ef 50%,#9333ea 100%);
-        background-size:250% auto;
-        -webkit-background-clip:text;background-clip:text;
-        -webkit-text-fill-color:transparent;
-        animation:fUp .7s .45s cubic-bezier(.16,1,.3,1) both,
-                 gradShift 6s ease infinite;
-      }
-      @keyframes gradShift{0%,100%{background-position:0% center}50%{background-position:100% center}}
-
-      .divider-line{
-        width:48px;height:2px;margin:18px auto 16px;
-        background:linear-gradient(90deg,transparent,var(--pink),var(--purple),transparent);
-        border-radius:2px;
-        animation:fUp .7s .55s cubic-bezier(.16,1,.3,1) both;
+      .modal-action-btn {
+        width: 100%;
+        padding: 12px;
+        background: var(--border-dark);
+        color: #ffffff;
+        border: none;
+        border-radius: 999px;
+        font-weight: 700;
+        cursor: pointer;
       }
 
-      .message{
-        font-size:clamp(14px,2.2vw,16.5px);font-weight:500;
-        color:var(--t2);line-height:1.55;margin:0 0 22px;
-        animation:fUp .7s .63s cubic-bezier(.16,1,.3,1) both;
+      /* TOAST */
+      .toast-msg {
+        position: fixed;
+        bottom: 24px;
+        left: 50%;
+        transform: translateX(-50%) translateY(80px);
+        background: #0f172a;
+        color: #ffffff;
+        padding: 10px 22px;
+        border-radius: 999px;
+        font-size: 0.88rem;
+        font-weight: 600;
+        box-shadow: 0 10px 25px rgba(0,0,0,0.25);
+        opacity: 0;
+        transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+        z-index: 200;
+        pointer-events: none;
+        display: flex;
+        align-items: center;
+        gap: 8px;
+      }
+      .toast-msg.show {
+        transform: translateX(-50%) translateY(0);
+        opacity: 1;
       }
 
-      /* ---- BUTTONS ---- */
-      .btn-group{
-        display:flex;flex-wrap:wrap;gap:10px;
-        justify-content:center;
-        animation:fUp .7s .73s cubic-bezier(.16,1,.3,1) both;
-      }
-
-      /* Primary — Messenger */
-      .btn-primary{
-        display:inline-flex;align-items:center;gap:8px;
-        padding:13px 26px;
-        border-radius:var(--r-btn);border:none;
-        background:linear-gradient(135deg, #d946ef, #9333ea);
-        color:#fff;font-family:var(--font);font-size:16px;font-weight:700;
-        text-decoration:none;cursor:pointer;position:relative;overflow:hidden;
-        box-shadow:inset 0 0 12px rgba(255,255,255,.3),
-                   0 0 28px rgba(217,70,239,.3),
-                   0 4px 14px rgba(147,51,234,.3);
-        transition:all .4s cubic-bezier(.16,1,.3,1);
-      }
-      .btn-primary::before{
-        content:'';position:absolute;inset:0;
-        background:linear-gradient(135deg,rgba(255,255,255,.18),transparent 60%);
-        opacity:0;transition:opacity .3s;
-      }
-      .btn-primary:hover{
-        transform:translateY(-3px) scale(1.03);
-        box-shadow:inset 0 0 16px rgba(255,255,255,.4),
-                   0 0 44px rgba(217,70,239,.4),
-                   0 8px 28px rgba(147,51,234,.4);
-      }
-      .btn-primary:hover::before{opacity:1}
-      .btn-primary:active{transform:translateY(0) scale(.97);transition-duration:.1s}
-      .btn-primary:focus-visible{outline:2px solid var(--coral);outline-offset:3px}
-      .btn-primary svg,.btn-primary span{position:relative;z-index:1}
-
-      /* Secondary — Change name */
-      .btn-secondary{
-        display:inline-flex;align-items:center;gap:7px;
-        padding:12px 22px;
-        border-radius:var(--r-btn);
-        border:1px solid rgba(255,255,255,.12);
-        background:rgba(255,255,255,.04);
-        color:var(--t2);
-        font-family:var(--font);font-size:13.5px;font-weight:600;
-        cursor:pointer;
-        transition:all .35s cubic-bezier(.16,1,.3,1);
-        backdrop-filter:blur(8px);-webkit-backdrop-filter:blur(8px);
-      }
-      .btn-secondary:hover{
-        background:rgba(255,255,255,.1);
-        border-color:rgba(255,255,255,.22);
-        color:var(--t1);
-        transform:translateY(-2px);
-        box-shadow:0 4px 20px rgba(124,58,237,.15);
-      }
-      .btn-secondary:active{transform:translateY(0) scale(.97)}
-      .btn-secondary:focus-visible{outline:2px solid var(--purple);outline-offset:3px}
-
-      /* ---- CLOCK (bento sub-tile) ---- */
-      .clock{
-        display:flex;align-items:center;justify-content:center;gap:10px;
-        font-variant-numeric:tabular-nums;
-        animation:fUp .7s .88s cubic-bezier(.16,1,.3,1) both;
-      }
-      .clock-time{
-        font-size:clamp(18px,3.5vw,24px);font-weight:800;
-        letter-spacing:1.5px;color:var(--t1);
-      }
-      .clock-sep{
-        display:inline-block;
-        animation:blink 1.2s steps(2,jump-none) infinite;
-      }
-      @keyframes blink{50%{opacity:.2}}
-      .clock-dot{color:var(--t3);font-weight:300;font-size:18px}
-      .clock-date{
-        font-size:clamp(11px,1.5vw,13px);font-weight:500;
-        color:var(--t3);letter-spacing:.5px;
-      }
-
-      /* ---- Shared ---- */
-      @keyframes fUp{
-        from{opacity:0;transform:translateY(20px)}
-        to{opacity:1;transform:translateY(0)}
-      }
-
-      /* ========================================
-         MODAL
-         ======================================== */
-      .modal-overlay{
-        position:fixed;inset:0;z-index:100;
-        display:grid;place-items:center;
-        background:rgba(8,0,21,.75);
-        backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px);
-        opacity:0;visibility:hidden;
-        transition:opacity .45s,visibility .45s;
-      }
-      .modal-overlay.open{opacity:1;visibility:visible}
-
-      .modal{
-        background:rgba(20,10,50,.88);
-        backdrop-filter:blur(40px);-webkit-backdrop-filter:blur(40px);
-        border:1px solid var(--g-border);
-        border-radius:24px;
-        padding:clamp(28px,5vw,42px) clamp(24px,5vw,36px);
-        max-width:min(90vw,380px);width:100%;
-        text-align:center;
-        transform:translateY(28px) scale(.93);
-        transition:transform .45s cubic-bezier(.16,1,.3,1);
-        box-shadow:0 28px 80px rgba(8,0,21,.25),0 0 60px rgba(124,58,237,.15);
-      }
-      .modal-overlay.open .modal{transform:translateY(0) scale(1)}
-
-      .modal-icon{filter:drop-shadow(0 0 12px rgba(244,114,182,.4));margin-bottom:14px}
-
-      .modal h2{
-        font-size:clamp(22px,5vw,28px);font-weight:800;margin-bottom:6px;
-        background:linear-gradient(135deg,#fff,var(--coral));
-        -webkit-background-clip:text;background-clip:text;
-        -webkit-text-fill-color:transparent;
-      }
-      .modal-desc{font-size:13.5px;color:var(--t2);margin-bottom:22px;line-height:1.5}
-
-      .modal-input{
-        width:100%;padding:14px 20px;
-        border:1px solid rgba(255,255,255,.1);border-radius:14px;
-        background:rgba(255,255,255,.06);
-        color:var(--t1);font-family:var(--font);font-size:16px;font-weight:500;
-        outline:none;transition:all .3s;margin-bottom:16px;
-      }
-      .modal-input::placeholder{color:var(--t3)}
-      .modal-input:focus{
-        border-color:var(--purple);
-        box-shadow:0 0 0 3px rgba(124,58,237,.18);
-        background:rgba(255,255,255,.1);
-      }
-
-      .modal-submit{
-        width:100%;padding:14px;border:none;border-radius:14px;
-        background:linear-gradient(135deg,var(--coral),var(--pink));
-        color:#fff;font-family:var(--font);font-size:15px;font-weight:700;
-        cursor:pointer;transition:all .35s cubic-bezier(.16,1,.3,1);
-        box-shadow:0 0 20px rgba(255,107,107,.2);
-      }
-      .modal-submit:hover{transform:translateY(-2px);box-shadow:0 8px 32px rgba(255,107,107,.35)}
-      .modal-submit:active{transform:translateY(0) scale(.97)}
-      .modal-submit:focus-visible{outline:2px solid var(--coral);outline-offset:3px}
-
-      /* ========================================
-         FOOTER
-         ======================================== */
-      .page-footer{
-        position:fixed;bottom:clamp(60px,12vh,110px);
-        left:50%;transform:translateX(-50%);
-        z-index:10;font-size:10.5px;color:var(--t3);
-        letter-spacing:1.5px;text-transform:uppercase;
-        animation:fUp .8s 1.5s cubic-bezier(.16,1,.3,1) both;
-      }
-
-      /* ========================================
+      /* ========================================================
          RESPONSIVE
-         ======================================== */
-      @media(max-width:420px){
-        .card{border-radius:22px}
-        .card-hero{padding:22px 18px 16px}
-        .card-body{padding:0 18px 20px}
-        .card-footer{padding:12px 18px 14px}
-        .btn-group{flex-direction:column;align-items:stretch}
-        .btn-primary,.btn-secondary{justify-content:center}
-        .clock{flex-direction:column;gap:4px}
-      }
-
-      /* ========================================
-         ACCESSIBILITY
-         ======================================== */
-      @media(prefers-reduced-motion:reduce){
-        *,*::before,*::after{
-          animation-duration:.001s!important;
-          animation-delay:0s!important;
-          transition-duration:.001s!important;
+         ======================================================== */
+      @media (max-width: 580px) {
+        .card-inner {
+          padding: 34px 20px 24px;
         }
-        #pCanvas{display:none}
+        .tiles-grid {
+          grid-template-columns: 1fr;
+          gap: 12px;
+        }
+        .main-title {
+          font-size: 1.85rem;
+        }
+        .card-bottom-bar {
+          flex-direction: column;
+          gap: 10px;
+          text-align: center;
+          padding: 14px 18px;
+        }
+        .bottom-tags {
+          font-size: 0.65rem;
+          gap: 10px;
+        }
+        .neo-card {
+          box-shadow: 8px 10px 0px var(--shadow-dark);
+        }
       }
-
-      /* Skip-link (hidden but focusable) */
-      .skip-link{
-        position:fixed;top:-100%;left:50%;transform:translateX(-50%);
-        z-index:200;padding:10px 20px;
-        background:var(--purple);color:#fff;
-        border-radius:0 0 12px 12px;font-weight:700;
-        text-decoration:none;
-      }
-      .skip-link:focus{top:0}
     </style>
   </head>
 
   <body>
-    <!-- Accessibility skip link -->
-    <a class="skip-link" href="#mainCard">Bỏ qua đến nội dung chính</a>
-
-    <!-- Background layers -->
-    <div class="aurora" aria-hidden="true">
-      <div class="aurora-orb"></div><div class="aurora-orb"></div>
-      <div class="aurora-orb"></div><div class="aurora-orb"></div>
-    </div>
-    <canvas id="pCanvas" aria-hidden="true"></canvas>
-
-    <!-- Hearts -->
-    <div class="hearts" aria-hidden="true" id="heartsLayer"></div>
-
-    <!-- Waves -->
-    <div class="waves" aria-hidden="true">
-      <div class="wave">
-        <svg viewBox="0 0 1440 100" preserveAspectRatio="none" fill="none">
-          <path d="M0 45C240 80 480 10 720 45C960 80 1200 10 1440 45L1440 100L0 100Z" fill="rgba(124,58,237,.08)"/>
-        </svg>
-      </div>
-      <div class="wave">
-        <svg viewBox="0 0 1440 100" preserveAspectRatio="none" fill="none">
-          <path d="M0 55C180 20 420 85 720 40C1020 -5 1260 70 1440 35L1440 100L0 100Z" fill="rgba(236,72,153,.06)"/>
-        </svg>
-      </div>
+    <!-- TOAST NOTIFICATION -->
+    <div class="toast-msg" id="toast">
+      <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#10b981" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+        <polyline points="20 6 9 17 4 12"></polyline>
+      </svg>
+      <span id="toastText">Đã sao chép!</span>
     </div>
 
-    <!-- ===== MAIN CARD ===== -->
-    <div class="card-wrap">
-      <main class="card" id="mainCard" role="region" aria-label="Lời chào">
-        <div class="card-glow" id="cardGlow"></div>
-
-        <!-- HERO — Icon + Greeting + Name -->
-        <section class="card-hero">
-          <div class="icon-area">
-            <div class="icon-wrap" id="iconWrap" role="button" tabindex="0" aria-label="Gửi tim">
-              <svg viewBox="0 0 24 24" width="48" height="48" aria-hidden="true">
-                <defs><linearGradient id="iG" x1="0%" y1="0%" x2="100%" y2="100%">
-                  <stop offset="0%" stop-color="#ff6b6b"/><stop offset="100%" stop-color="#fbbf24"/>
-                </linearGradient></defs>
-                <path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z" fill="url(#iG)"/>
-              </svg>
+    <!-- MAIN PAGE WRAPPER -->
+    <div class="page-wrapper">
+      <!-- THE NEO-CARD -->
+      <main class="neo-card">
+        <div class="card-inner">
+          <!-- TOP BADGE (AVATAR / LOGO) -->
+          <div class="top-badge-wrapper">
+            <div class="top-badge">
+              <img
+                src="https://avatars.githubusercontent.com/u/202928618?v=4"
+                alt="Vũ Mạnh Kỳ"
+                class="avatar-img"
+              />
             </div>
+            <div class="badge-decor">IT 🇻🇳</div>
           </div>
-          <p class="hello">Xin chào</p>
-          <h1 class="name" id="nameDisplay">Friend</h1>
-        </section>
 
-        <div class="divider-line" aria-hidden="true"></div>
+          <!-- HEADLINE & SUBTITLE -->
+          <h1 class="main-title">VŨ MẠNH KỲ</h1>
+          <div class="user-handle">@kyvu09 · Software Developer</div>
+          <p class="main-subtitle">
+            IT student tại TP. Hồ Chí Minh. Đam mê biến ý tưởng thành phần mềm thực tế — từ Web, Backend, cho tới Linux, Networking & An toàn thông tin.
+          </p>
 
-        <!-- BODY — Message + Buttons -->
-        <section class="card-body">
-          <p class="message">Bạn vào đây có việc gì không?</p>
-          <div class="btn-group">
-            <a class="btn-primary" href="https://m.me/vu.manh.ky.826841" target="_blank" rel="noopener noreferrer" id="linkfb">
-              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>
-              <span>Nhắn tin cho mình</span>
-            </a>
-            <button class="btn-secondary" id="changeName" type="button">
-              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 20h9"/><path d="M16.5 3.5a2.121 2.121 0 0 1 3 3L7 19l-4 1 1-4L16.5 3.5z"/></svg>
-              Đổi tên
+          <!-- TABS CONTROL -->
+          <div class="tabs-control" role="tablist">
+            <button class="tab-btn active" data-tab="tab-about" type="button" role="tab">
+              Giới thiệu
+            </button>
+            <button class="tab-btn" data-tab="tab-memories" type="button" role="tab">
+              Kỷ niệm & Cột mốc
+            </button>
+            <button class="tab-btn" data-tab="tab-skills" type="button" role="tab">
+              Tech Stack
             </button>
           </div>
-        </section>
 
-        <!-- FOOTER — Clock -->
-        <section class="card-footer">
-          <div class="clock" aria-live="off">
-            <span class="clock-time">
-              <span id="hh">00</span><span class="clock-sep">:</span><span id="mm">00</span><span class="clock-sep">:</span><span id="ss">00</span>
-            </span>
-            <span class="clock-dot">·</span>
-            <span class="clock-date" id="clockDate">—</span>
+          <!-- TAB 1: GIỚI THIỆU & KẾT NỐI (2x2 TILES) -->
+          <div class="tab-panel active" id="tab-about" role="tabpanel">
+            <div class="tiles-grid">
+              <!-- Tile 1: GitHub -->
+              <a href="https://github.com/kyvu09" target="_blank" rel="noopener noreferrer" class="feature-tile">
+                <div class="tile-icon-box">
+                  <svg width="22" height="22" viewBox="0 0 24 24" fill="currentColor">
+                    <path fill-rule="evenodd" clip-rule="evenodd" d="M12 2C6.477 2 2 6.484 2 12.017c0 4.425 2.865 8.18 6.839 9.504.5.092.682-.217.682-.483 0-.237-.008-.868-.013-1.703-2.782.605-3.369-1.343-3.369-1.343-.454-1.158-1.11-1.466-1.11-1.466-.908-.62.069-.608.069-.608 1.003.07 1.53 1.032 1.53 1.032.892 1.53 2.341 1.088 2.91.832.092-.647.35-1.088.636-1.338-2.22-.253-4.555-1.113-4.555-4.951 0-1.093.39-1.988 1.029-2.688-.103-.253-.446-1.272.098-2.65 0 0 .84-.27 2.75 1.026A9.564 9.564 0 0112 6.844c.85.004 1.705.115 2.504.337 1.909-1.296 2.747-1.027 2.747-1.027.546 1.379.202 2.398.1 2.651.64.7 1.028 1.595 1.028 2.688 0 3.848-2.339 4.695-4.566 4.943.359.309.678.92.678 1.855 0 1.338-.012 2.419-.012 2.747 0 .268.18.58.688.482A10.019 10.019 0 0022 12.017C22 6.484 17.522 2 12 2z"/>
+                  </svg>
+                </div>
+                <div class="tile-content">
+                  <div class="tile-title">
+                    <span>GITHUB PROFILE</span>
+                    <span class="tile-arrow">↗</span>
+                  </div>
+                  <div class="tile-desc">Khám phá 30+ repositories và các dự án mã nguồn mở.</div>
+                </div>
+              </a>
+
+              <!-- Tile 2: Facebook / Messenger -->
+              <a href="https://facebook.com/vu.manh.ky.826841" target="_blank" rel="noopener noreferrer" class="feature-tile">
+                <div class="tile-icon-box" style="color:#1877f2;">
+                  <svg width="22" height="22" viewBox="0 0 24 24" fill="currentColor">
+                    <path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/>
+                  </svg>
+                </div>
+                <div class="tile-content">
+                  <div class="tile-title">
+                    <span>FACEBOOK</span>
+                    <span class="tile-arrow">↗</span>
+                  </div>
+                  <div class="tile-desc">Trang cá nhân kết nối, chia sẻ cuộc sống và học tập.</div>
+                </div>
+              </a>
+
+              <!-- Tile 3: Philosophy -->
+              <div class="feature-tile" onclick="openStory('philosophy')">
+                <div class="tile-icon-box" style="color:#7c3aed;">
+                  <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <path d="M12 2v4M12 18v4M4.93 4.93l2.83 2.83M16.24 16.24l2.83 2.83M2 12h4M18 12h4M4.93 19.07l2.83-2.83M16.24 7.76l2.83-2.83"/>
+                  </svg>
+                </div>
+                <div class="tile-content">
+                  <div class="tile-title">
+                    <span>TRIẾT LÝ HỌC HỎI</span>
+                    <span class="tile-arrow">ⓘ</span>
+                  </div>
+                  <div class="tile-desc">Learn → Build → Break → Fix → Repeat. Làm thật để hiểu sâu.</div>
+                </div>
+              </div>
+
+              <!-- Tile 4: Email Direct -->
+              <div class="feature-tile" id="copyEmailTile" title="Bấm để sao chép địa chỉ email">
+                <div class="tile-icon-box" style="color:#059669;">
+                  <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/>
+                    <polyline points="22,6 12,13 2,6"/>
+                  </svg>
+                </div>
+                <div class="tile-content">
+                  <div class="tile-title">
+                    <span>EMAIL LIÊN HỆ</span>
+                    <span class="tile-arrow">📋</span>
+                  </div>
+                  <div class="tile-desc">manhky26@gmail.com (Chạm để sao chép nhanh).</div>
+                </div>
+              </div>
+            </div>
           </div>
-        </section>
+
+          <!-- TAB 2: KỶ NIỆM & CỘT MỐC (2x2 TILES) -->
+          <div class="tab-panel" id="tab-memories" role="tabpanel">
+            <div class="tiles-grid">
+              <!-- Memory 1: Learn English -->
+              <div class="feature-tile" onclick="openStory('english')">
+                <div class="tile-icon-box" style="color:#2563eb;">
+                  <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/>
+                    <path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"/>
+                  </svg>
+                </div>
+                <div class="tile-content">
+                  <div class="tile-title">
+                    <span>HỌC TỪ VỰNG ANH</span>
+                    <span class="tile-arrow">↗</span>
+                  </div>
+                  <div class="tile-desc">Web app quiz tương tác, luyện nghe, chính tả & từ điển API.</div>
+                </div>
+              </div>
+
+              <!-- Memory 2: Edit Video Tool -->
+              <div class="feature-tile" onclick="openStory('video')">
+                <div class="tile-icon-box" style="color:#d946ef;">
+                  <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <polygon points="23 7 16 12 23 17 23 7"/>
+                    <rect x="1" y="5" width="15" height="14" rx="2" ry="2"/>
+                  </svg>
+                </div>
+                <div class="tile-content">
+                  <div class="tile-title">
+                    <span>EDIT VIDEO TOOL</span>
+                    <span class="tile-arrow">↗</span>
+                  </div>
+                  <div class="tile-desc">Quy trình tự động hóa kịch bản, AI voice & xử lý video FFmpeg.</div>
+                </div>
+              </div>
+
+              <!-- Memory 3: Hành trình sinh viên IT -->
+              <div class="feature-tile" onclick="openStory('student')">
+                <div class="tile-icon-box" style="color:#10b981;">
+                  <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <path d="M22 10v6M2 10l10-5 10 5-10 5z"/>
+                    <path d="M6 12v5c3 3 9 3 12 0v-5"/>
+                  </svg>
+                </div>
+                <div class="tile-content">
+                  <div class="tile-title">
+                    <span>HÀNH TRÌNH SÀI GÒN</span>
+                    <span class="tile-arrow">↗</span>
+                  </div>
+                  <div class="tile-desc">Cột mốc bước chân vào ngành IT tại TP.HCM & đêm trắng debug.</div>
+                </div>
+              </div>
+
+              <!-- Memory 4: Game & Web nền tảng -->
+              <div class="feature-tile" onclick="openStory('game')">
+                <div class="tile-icon-box" style="color:#f59e0b;">
+                  <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <rect x="2" y="6" width="20" height="12" rx="2"/>
+                    <circle cx="12" cy="12" r="2"/>
+                    <path d="M6 12h.01M18 12h.01"/>
+                  </svg>
+                </div>
+                <div class="tile-content">
+                  <div class="tile-title">
+                    <span>MEMORY GAME & WEB</span>
+                    <span class="tile-arrow">↗</span>
+                  </div>
+                  <div class="tile-desc">Game lật thẻ bài C# WinForms và web du lịch đầu tay.</div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- TAB 3: TECH STACK & KỸ NĂNG (2x2 TILES) -->
+          <div class="tab-panel" id="tab-skills" role="tabpanel">
+            <div class="tiles-grid">
+              <!-- Skill 1: Languages -->
+              <div class="feature-tile" onclick="openStory('tech-lang')">
+                <div class="tile-icon-box" style="color:#0ea5e9;">
+                  <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <polyline points="16 18 22 12 16 6"/>
+                    <polyline points="8 6 2 12 8 18"/>
+                  </svg>
+                </div>
+                <div class="tile-content">
+                  <div class="tile-title">
+                    <span>NGÔN NGỮ CHÍNH</span>
+                    <span class="tile-arrow">ⓘ</span>
+                  </div>
+                  <div class="tile-desc">JavaScript (ES6+), Python, C# (.NET), HTML5 & CSS3.</div>
+                </div>
+              </div>
+
+              <!-- Skill 2: Web & Backend -->
+              <div class="feature-tile" onclick="openStory('tech-web')">
+                <div class="tile-icon-box" style="color:#8b5cf6;">
+                  <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <rect x="2" y="3" width="20" height="14" rx="2" ry="2"/>
+                    <line x1="8" y1="21" x2="16" y2="21"/>
+                    <line x1="12" y1="17" x2="12" y2="21"/>
+                  </svg>
+                </div>
+                <div class="tile-content">
+                  <div class="tile-title">
+                    <span>WEB & DATABASE</span>
+                    <span class="tile-arrow">ⓘ</span>
+                  </div>
+                  <div class="tile-desc">React.js, Node.js, Express, MySQL, Firebase, Git.</div>
+                </div>
+              </div>
+
+              <!-- Skill 3: Linux & Security -->
+              <div class="feature-tile" onclick="openStory('tech-sec')">
+                <div class="tile-icon-box" style="color:#ef4444;">
+                  <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <rect x="3" y="11" width="18" height="11" rx="2" ry="2"/>
+                    <path d="M7 11V7a5 5 0 0 1 10 0v4"/>
+                  </svg>
+                </div>
+                <div class="tile-content">
+                  <div class="tile-title">
+                    <span>LINUX & BẢO MẬT</span>
+                    <span class="tile-arrow">ⓘ</span>
+                  </div>
+                  <div class="tile-desc">Linux Systems, Kali Linux, Bash, Web Pentesting.</div>
+                </div>
+              </div>
+
+              <!-- Skill 4: Networking & Tools -->
+              <div class="feature-tile" onclick="openStory('tech-net')">
+                <div class="tile-icon-box" style="color:#14b8a6;">
+                  <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <circle cx="12" cy="12" r="10"/>
+                    <line x1="2" y1="12" x2="22" y2="12"/>
+                    <path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/>
+                  </svg>
+                </div>
+                <div class="tile-content">
+                  <div class="tile-title">
+                    <span>NETWORKING</span>
+                    <span class="tile-arrow">ⓘ</span>
+                  </div>
+                  <div class="tile-desc">Mạng máy tính TCP/IP, RESTful API & Server Deployment.</div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- CTA ACTIONS (Prominent Pill Button) -->
+          <div class="cta-group">
+            <a
+              href="https://m.me/vu.manh.ky.826841"
+              target="_blank"
+              rel="noopener noreferrer"
+              class="btn-main-cta"
+            >
+              <span>NHẮN TIN CHO MÌNH NGAY!</span>
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                <line x1="5" y1="12" x2="19" y2="12"></line>
+                <polyline points="12 5 19 12 12 19"></polyline>
+              </svg>
+            </a>
+
+            <!-- Sub Pills -->
+            <div class="secondary-links">
+              <a href="https://github.com/kyvu09" target="_blank" rel="noopener noreferrer" class="btn-pill">
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor">
+                  <path fill-rule="evenodd" clip-rule="evenodd" d="M12 2C6.477 2 2 6.484 2 12.017c0 4.425 2.865 8.18 6.839 9.504.5.092.682-.217.682-.483 0-.237-.008-.868-.013-1.703-2.782.605-3.369-1.343-3.369-1.343-.454-1.158-1.11-1.466-1.11-1.466-.908-.62.069-.608.069-.608 1.003.07 1.53 1.032 1.53 1.032.892 1.53 2.341 1.088 2.91.832.092-.647.35-1.088.636-1.338-2.22-.253-4.555-1.113-4.555-4.951 0-1.093.39-1.988 1.029-2.688-.103-.253-.446-1.272.098-2.65 0 0 .84-.27 2.75 1.026A9.564 9.564 0 0112 6.844c.85.004 1.705.115 2.504.337 1.909-1.296 2.747-1.027 2.747-1.027.546 1.379.202 2.398.1 2.651.64.7 1.028 1.595 1.028 2.688 0 3.848-2.339 4.695-4.566 4.943.359.309.678.92.678 1.855 0 1.338-.012 2.419-.012 2.747 0 .268.18.58.688.482A10.019 10.019 0 0022 12.017C22 6.484 17.522 2 12 2z"/>
+                </svg>
+                <span>GitHub Repos (30+)</span>
+              </a>
+              <button class="btn-pill" id="copyEmailBtn" type="button">
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                  <rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect>
+                  <path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path>
+                </svg>
+                <span>Sao chép Email</span>
+              </button>
+            </div>
+          </div>
+        </div>
+
+        <!-- CARD BOTTOM BAR (LIKE SCREENSHOT) -->
+        <div class="card-bottom-bar">
+          <div class="bottom-tags">
+            <span>MINIMALIST</span>
+            <span>·</span>
+            <span>CONSISTENCY</span>
+            <span>·</span>
+            <span>KYVU09</span>
+          </div>
+
+          <div class="bottom-clock">
+            <span class="clock-dot"></span>
+            <span id="liveClock">--:--:-- GMT+7</span>
+          </div>
+        </div>
       </main>
     </div>
 
-    <!-- Footer credit -->
-    <div class="page-footer" aria-hidden="true">Made with love</div>
-
-    <!-- ===== MODAL ===== -->
-    <div class="modal-overlay" id="modal">
-      <div class="modal" role="dialog" aria-modal="true" aria-labelledby="mT">
-        <svg class="modal-icon" viewBox="0 0 24 24" width="42" height="42" aria-hidden="true">
-          <path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z" fill="url(#iG)"/>
-        </svg>
-        <h2 id="mT">Bạn tên gì?</h2>
-        <p class="modal-desc">Nhập tên để mình gửi lời chào đặc biệt nhé</p>
-        <input class="modal-input" id="nameInput" type="text" placeholder="Nhập họ tên..." maxlength="64" autocomplete="off"/>
-        <button class="modal-submit" id="modalSubmit" type="button">Xác nhận</button>
+    <!-- MODAL DETAILS -->
+    <div class="modal-backdrop" id="storyModal" role="dialog" aria-modal="true">
+      <div class="modal-box">
+        <button class="modal-close-btn" id="modalCloseBtn" aria-label="Đóng">✕</button>
+        <span class="modal-badge" id="modalBadge">KỶ NIỆM</span>
+        <h3 class="modal-title" id="modalTitle">Tiêu đề</h3>
+        <p class="modal-desc" id="modalDesc">Nội dung chi tiết...</p>
+        <div class="modal-tags" id="modalTags"></div>
+        <button class="modal-action-btn" id="modalOkBtn" type="button">Đóng cửa sổ</button>
       </div>
     </div>
 
-    <!-- ===============================================
-         SCRIPTS
-         =============================================== -->
+    <!-- SCRIPT -->
     <script>
-    (() => {
-      'use strict';
+      (() => {
+        'use strict';
 
-      /* ---- helpers ---- */
-      const rand = (a,b) => Math.random()*(b-a)+a;
-      const pick = a => a[(Math.random()*a.length)|0];
-      const $ = id => document.getElementById(id);
+        // 1. Tab Switching
+        const tabBtns = document.querySelectorAll('.tab-btn');
+        const tabPanels = document.querySelectorAll('.tab-panel');
 
-      /* ---- refs ---- */
-      const heartsEl  = $('heartsLayer');
-      const nameEl    = $('nameDisplay');
-      const iconWrap  = $('iconWrap');
-      const mainCard  = $('mainCard');
-      const cardGlow  = $('cardGlow');
-      const modalEl   = $('modal');
-      const nameInput = $('nameInput');
-      const modalSub  = $('modalSubmit');
-      const changeBtn = $('changeName');
-      const hhEl=$('hh'), mmEl=$('mm'), ssEl=$('ss'), dateEl=$('clockDate');
+        tabBtns.forEach((btn) => {
+          btn.addEventListener('click', () => {
+            tabBtns.forEach((b) => b.classList.remove('active'));
+            tabPanels.forEach((p) => p.classList.remove('active'));
 
-      const isDesk = matchMedia('(pointer:fine)').matches && innerWidth >= 1024;
-      const szK = isDesk ? 1.25 : 1;
-
-      /* ================================================
-         PARTICLE CONSTELLATION (Canvas)
-         ================================================ */
-      const cv = $('pCanvas');
-      const cx = cv.getContext('2d');
-      let W, H;
-      const mouse = { x:-9e3, y:-9e3 };
-      const pcColors = ['124,58,237','236,72,153','251,191,36','34,211,238','52,211,153'];
-      const particles = [];
-
-      function resize() { W = cv.width = innerWidth; H = cv.height = innerHeight; }
-      resize();
-      addEventListener('resize', resize);
-      addEventListener('mousemove', e => { mouse.x=e.clientX; mouse.y=e.clientY; });
-      addEventListener('mouseleave', () => { mouse.x=-9e3; mouse.y=-9e3; });
-      // also react to touch
-      addEventListener('touchmove', e => {
-        const t = e.touches[0];
-        if(t){ mouse.x=t.clientX; mouse.y=t.clientY; }
-      }, {passive:true});
-      addEventListener('touchend', () => { mouse.x=-9e3; mouse.y=-9e3; });
-
-      const N = isDesk ? 55 : 22;
-      for(let i=0;i<N;i++){
-        particles.push({
-          x:rand(0,W), y:rand(0,H),
-          vx:(Math.random()-.5)*.3, vy:(Math.random()-.5)*.3,
-          r:rand(.8,2.2),
-          c:pcColors[i%pcColors.length],
-          a:rand(.15,.4)
-        });
-      }
-
-      function drawP(){
-        cx.clearRect(0,0,W,H);
-        const cDist = isDesk ? 115 : 90;
-        for(let i=0;i<particles.length;i++){
-          const p=particles[i];
-          p.x+=p.vx; p.y+=p.vy;
-          if(p.x<0)p.x=W; if(p.x>W)p.x=0;
-          if(p.y<0)p.y=H; if(p.y>H)p.y=0;
-
-          const dx=p.x-mouse.x, dy=p.y-mouse.y;
-          const d=Math.hypot(dx,dy);
-          if(d<150 && d>0){
-            const f=(150-d)/150*.012;
-            p.vx+=dx/d*f; p.vy+=dy/d*f;
-          }
-          p.vx*=.996; p.vy*=.996;
-
-          cx.beginPath();
-          cx.arc(p.x,p.y,p.r,0,6.2832);
-          cx.fillStyle=`rgba(${p.c},${p.a})`;
-          cx.fill();
-
-          for(let j=i+1;j<particles.length;j++){
-            const q=particles[j];
-            const dd=Math.hypot(p.x-q.x,p.y-q.y);
-            if(dd<cDist){
-              cx.beginPath();
-              cx.moveTo(p.x,p.y); cx.lineTo(q.x,q.y);
-              cx.strokeStyle=`rgba(${p.c},${(1-dd/cDist)*.07})`;
-              cx.lineWidth=.5;
-              cx.stroke();
-            }
-          }
-        }
-        requestAnimationFrame(drawP);
-      }
-      requestAnimationFrame(drawP);
-
-      /* ================================================
-         HEARTS
-         ================================================ */
-      const HUES = [-40,-20,0,15,30,50,80,160,200,260]; // diverse hue range
-      const MIN_SZ=11, MAX_SZ=26, MIN_DUR=6.5, MAX_DUR=11.5, SPAWN=340;
-
-      function createHeart(){
-        const h=document.createElement('div');
-        h.className='heart';
-        const sz=rand(MIN_SZ,MAX_SZ)*szK;
-        const dur=rand(MIN_DUR,MAX_DUR);
-        h.style.cssText=`--sz:${sz}px;--dur:${dur}s;--dx:${rand(-35,35)}px;--op:${rand(.45,.85)};--gl:${rand(5,13)}px;--hue:${pick(HUES)}deg;left:${rand(2,98)}vw;`;
-        heartsEl.appendChild(h);
-        setTimeout(()=>h.remove(), dur*1000+600);
-      }
-
-      let last=0;
-      function tick(ts){
-        if(!document.hidden && ts-last>SPAWN){
-          createHeart();
-          if(Math.random()<.2) createHeart();
-          last=ts;
-        }
-        requestAnimationFrame(tick);
-      }
-      requestAnimationFrame(tick);
-      document.addEventListener('visibilitychange',()=>{last=performance.now()});
-
-      /* Parallax */
-      if(isDesk){
-        document.addEventListener('mousemove',e=>{
-          const mx=(e.clientX/W-.5)*2, my=(e.clientY/H-.5)*2;
-          heartsEl.style.transform=`translate(${mx*10}px,${my*10}px)`;
-        });
-      }
-
-      /* ---- Burst ---- */
-      function burstAt(cx,cy,n=10){
-        for(let i=0;i<n;i++){
-          const a=Math.PI*2/n*i+rand(-.3,.3);
-          const dist=rand(35,85);
-          const el=document.createElement('div');
-          el.className='heart-burst';
-          el.style.cssText=`--sz:${rand(8,16)}px;--hue:${pick(HUES)}deg;--bx:${Math.cos(a)*dist}px;--by:${Math.sin(a)*dist}px;left:${cx}px;top:${cy}px;`;
-          document.body.appendChild(el);
-          setTimeout(()=>el.remove(),850);
-        }
-      }
-
-      /* ================================================
-         ICON INTERACTION
-         ================================================ */
-      function onIcon(){
-        iconWrap.classList.remove('pop');
-        void iconWrap.offsetWidth;
-        iconWrap.classList.add('pop');
-        setTimeout(()=>iconWrap.classList.remove('pop'),600);
-        const r=iconWrap.getBoundingClientRect();
-        burstAt(r.left+r.width/2, r.top+r.height/2, 12);
-      }
-      iconWrap.addEventListener('click', onIcon);
-      iconWrap.addEventListener('keydown', e=>{if(e.key==='Enter'||e.key===' '){e.preventDefault();onIcon()}});
-
-      /* ================================================
-         CARD TILT + CURSOR GLOW (desktop)
-         ================================================ */
-      if(isDesk){
-        mainCard.addEventListener('mousemove',e=>{
-          const r=mainCard.getBoundingClientRect();
-          const x=(e.clientX-r.left)/r.width-.5;
-          const y=(e.clientY-r.top)/r.height-.5;
-          mainCard.style.transform=`perspective(900px) rotateY(${x*5}deg) rotateX(${y*-5}deg)`;
-          cardGlow.style.left=(e.clientX-r.left)+'px';
-          cardGlow.style.top=(e.clientY-r.top)+'px';
-        });
-        mainCard.addEventListener('mouseleave',()=>{
-          mainCard.style.transition='transform .5s cubic-bezier(.16,1,.3,1)';
-          mainCard.style.transform='perspective(900px) rotateY(0) rotateX(0)';
-          setTimeout(()=>{mainCard.style.transition=''},500);
-        });
-      }
-
-      /* ================================================
-         CLOCK
-         ================================================ */
-      const pad=n=>String(n).padStart(2,'0');
-      const MO=['Tháng 1','Tháng 2','Tháng 3','Tháng 4','Tháng 5','Tháng 6','Tháng 7','Tháng 8','Tháng 9','Tháng 10','Tháng 11','Tháng 12'];
-      const DA=['Chủ nhật','Thứ 2','Thứ 3','Thứ 4','Thứ 5','Thứ 6','Thứ 7'];
-      function clock(){
-        const d=new Date();
-        hhEl.textContent=pad(d.getHours());
-        mmEl.textContent=pad(d.getMinutes());
-        ssEl.textContent=pad(d.getSeconds());
-        dateEl.textContent=`${DA[d.getDay()]}, ${d.getDate()} ${MO[d.getMonth()]} ${d.getFullYear()}`;
-      }
-      clock(); setInterval(clock,1000);
-
-      /* ================================================
-         MODAL
-         ================================================ */
-      function openM(){
-        modalEl.classList.add('open');
-        nameInput.value='';
-        setTimeout(()=>nameInput.focus(),120);
-      }
-      function closeM(){ modalEl.classList.remove('open'); }
-
-      function submit(){
-        const raw=nameInput.value.trim().slice(0,64);
-        const name=raw||'Friend';
-        nameEl.textContent=name;
-        closeM();
-        sendLog(name);
-        const r=mainCard.getBoundingClientRect();
-        burstAt(r.left+r.width/2, r.top+r.height*.3, 14);
-        for(let i=0;i<6;i++) setTimeout(createHeart,i*70);
-      }
-
-      modalSub.addEventListener('click',submit);
-      nameInput.addEventListener('keydown',e=>{if(e.key==='Enter')submit()});
-      modalEl.addEventListener('click',e=>{if(e.target===modalEl)submit()});
-
-      openM(); // first visit
-      changeBtn.addEventListener('click',openM);
-
-      /* ================================================
-         LOG
-         ================================================ */
-      function sendLog(name){
-        try{
-          const when=new Date().toLocaleString('vi-VN',{year:'numeric',month:'2-digit',day:'2-digit',hour:'2-digit',minute:'2-digit',second:'2-digit'});
-          fetch('https://script.google.com/macros/s/AKfycbyUDt5uVfC60IOvWE9DuNChQzoh6-HsULx-VJ-pr6M0wzi8rL0NZQXLR9H5_AKBjJ8XrA/exec',{
-            method:'POST',mode:'no-cors',
-            headers:{'Content-Type':'application/x-www-form-urlencoded'},
-            body:'name='+encodeURIComponent(name)+'&time='+encodeURIComponent(when)
+            btn.classList.add('active');
+            const target = btn.getAttribute('data-tab');
+            const panel = document.getElementById(target);
+            if (panel) panel.classList.add('active');
           });
-        }catch(_){}
-      }
-    })();
+        });
+
+        // 2. Real-time Clock (TP.HCM / GMT+7)
+        const clockEl = document.getElementById('liveClock');
+        function updateClock() {
+          if (!clockEl) return;
+          const now = new Date();
+          const time = now.toLocaleTimeString('vi-VN', {
+            hour: '2-digit',
+            minute: '2-digit',
+            second: '2-digit',
+            hour12: false
+          });
+          clockEl.textContent = `${time} (TP.HCM)`;
+        }
+        updateClock();
+        setInterval(updateClock, 1000);
+
+        // 3. Email Copy with Toast
+        const toast = document.getElementById('toast');
+        const toastText = document.getElementById('toastText');
+        let toastTimeout;
+
+        function showToast(msg) {
+          if (!toast) return;
+          if (toastText) toastText.textContent = msg;
+          toast.classList.add('show');
+          clearTimeout(toastTimeout);
+          toastTimeout = setTimeout(() => {
+            toast.classList.remove('show');
+          }, 2400);
+        }
+
+        const email = 'manhky26@gmail.com';
+        function copyEmail() {
+          const btnSpan = copyBtn ? copyBtn.querySelector('span') : null;
+          const origText = btnSpan ? btnSpan.textContent : '';
+
+          const onCopied = () => {
+            showToast('Đã sao chép email: ' + email);
+            if (btnSpan) {
+              btnSpan.textContent = '✓ ĐÃ SAO CHÉP!';
+              setTimeout(() => { btnSpan.textContent = origText; }, 2000);
+            }
+          };
+
+          if (navigator.clipboard && navigator.clipboard.writeText) {
+            navigator.clipboard.writeText(email).then(onCopied).catch(fallbackCopy);
+          } else {
+            fallbackCopy();
+          }
+        }
+
+        function fallbackCopy() {
+          const ta = document.createElement('textarea');
+          ta.value = email;
+          document.body.appendChild(ta);
+          ta.select();
+          document.execCommand('copy');
+          document.body.removeChild(ta);
+          showToast('Đã sao chép: ' + email);
+          const btnSpan = copyBtn ? copyBtn.querySelector('span') : null;
+          if (btnSpan) {
+            btnSpan.textContent = '✓ ĐÃ SAO CHÉP!';
+            setTimeout(() => { btnSpan.textContent = 'Sao chép Email'; }, 2000);
+          }
+        }
+
+        const copyTile = document.getElementById('copyEmailTile');
+        const copyBtn = document.getElementById('copyEmailBtn');
+        if (copyTile) copyTile.addEventListener('click', copyEmail);
+        if (copyBtn) copyBtn.addEventListener('click', copyEmail);
+
+        // 4. Modal Story Content
+        const storiesData = {
+          philosophy: {
+            badge: 'TRIẾT LÝ PHÁT TRIỂN',
+            title: 'Learn → Build → Break → Fix → Repeat',
+            desc: 'Cách nhanh nhất để thấu hiểu công nghệ là bắt tay vào xây dựng sản phẩm thực tế, không ngại sai sót và luôn giữ sự tò mò để tìm hiểu đến tận cùng lý do vì sao mọi thứ vận hành.',
+            tags: ['Mindset', 'Continuous Learning', 'Hands-on']
+          },
+          english: {
+            badge: 'DỰ ÁN WEB APP',
+            title: 'Learn English Vocabulary',
+            desc: 'Dự án website hỗ trợ học và rèn luyện từ vựng tiếng Anh tương tác: làm bài tập quiz trắc nghiệm, luyện nghe phát âm, kiểm tra chính tả (spelling) và dịch nghĩa. Tích hợp Dictionary API tra từ trực tiếp.',
+            tags: ['JavaScript', 'Firebase', 'Firestore', 'Dictionary API']
+          },
+          video: {
+            badge: 'AI & TOOLING',
+            title: 'Edit Video Tool',
+            desc: 'Hệ thống quy trình tự động hóa sản xuất nội dung video kết hợp trí tuệ nhân tạo: từ việc tạo kịch bản, chuyển văn bản thành giọng đọc truyền cảm (voice clone / TTS) đến render video hoàn chỉnh với FFmpeg.',
+            tags: ['Node.js', 'Express', 'FFmpeg', 'Python', 'AI Voice']
+          },
+          student: {
+            badge: 'HÀNH TRÌNH CUỘC SỐNG',
+            title: 'Khởi đầu sinh viên IT tại Sài Gòn',
+            desc: 'Những ngày đầu bước chân vào giảng đường IT tại TP. Hồ Chí Minh. Tự tay viết từng dòng code đầu tiên, thức trắng đêm sửa từng con bug khó nhằn và tự mày mò dựng máy chủ Linux đầu đời.',
+            tags: ['Ho Chi Minh City', 'Student Life', 'Self-Taught']
+          },
+          game: {
+            badge: 'KỸ NĂNG NỀN TẢNG',
+            title: 'Memory Card Game & Travel Web',
+            desc: 'Sản phẩm game desktop lật thẻ bài với nhiều cấp độ khó, cơ chế tính điểm và lưu lịch sử người chơi bằng C# WinForms, kết hợp dự án website du lịch giao diện linh hoạt giúp rèn luyện tư duy lập trình căn bản.',
+            tags: ['C#', 'WinForms', 'HTML/CSS', 'UI/UX']
+          },
+          'tech-lang': {
+            badge: 'NGÔN NGỮ',
+            title: 'Ngôn ngữ lập trình',
+            desc: 'Thành thạo JavaScript trong phát triển web hiện đại, Python cho các tác vụ xử lý dữ liệu & AI tooling, C# cho ứng dụng desktop và logic hướng đối tượng.',
+            tags: ['JavaScript', 'Python', 'C#', 'HTML5', 'CSS3']
+          },
+          'tech-web': {
+            badge: 'FRONTEND & BACKEND',
+            title: 'Web Development & Database',
+            desc: 'Xây dựng giao diện responsive với React, dịch vụ backend với Node.js / Express, quản lý dữ liệu với MySQL và nền tảng thời gian thực Firebase.',
+            tags: ['React.js', 'Node.js', 'Express', 'MySQL', 'Firebase', 'Git']
+          },
+          'tech-sec': {
+            badge: 'SECURITY & OS',
+            title: 'Hệ thống Linux & An toàn thông tin',
+            desc: 'Làm việc thành thạo với môi trường Linux (Ubuntu, Debian, Kali Linux), viết script tự động hóa với Bash và tìm hiểu các kỹ thuật kiểm thử bảo mật web.',
+            tags: ['Linux', 'Kali Linux', 'Bash Scripting', 'Web Pentesting']
+          },
+          'tech-net': {
+            badge: 'NETWORKING',
+            title: 'Mạng máy tính & Giao thức',
+            desc: 'Tìm hiểu sâu về cách dữ liệu di chuyển trên Internet qua mô hình TCP/IP, DNS, HTTP/HTTPS, cấu hình firewall và triển khai dịch vụ an toàn.',
+            tags: ['TCP/IP', 'Networking', 'RESTful API', 'DNS', 'HTTP']
+          }
+        };
+
+        const modal = document.getElementById('storyModal');
+        const modalBadge = document.getElementById('modalBadge');
+        const modalTitle = document.getElementById('modalTitle');
+        const modalDesc = document.getElementById('modalDesc');
+        const modalTags = document.getElementById('modalTags');
+        const modalClose = document.getElementById('modalCloseBtn');
+        const modalOk = document.getElementById('modalOkBtn');
+
+        window.openStory = function(key) {
+          const item = storiesData[key];
+          if (!item || !modal) return;
+          modalBadge.textContent = item.badge;
+          modalTitle.textContent = item.title;
+          modalDesc.textContent = item.desc;
+          modalTags.innerHTML = item.tags.map(t => `<span class="modal-tag-pill">${t}</span>`).join('');
+          modal.classList.add('show');
+        };
+
+        function closeModal() {
+          if (modal) modal.classList.remove('show');
+        }
+
+        if (modalClose) modalClose.addEventListener('click', closeModal);
+        if (modalOk) modalOk.addEventListener('click', closeModal);
+        if (modal) {
+          modal.addEventListener('click', (e) => {
+            if (e.target === modal) closeModal();
+          });
+        }
+      })();
     </script>
   </body>
 </html>
